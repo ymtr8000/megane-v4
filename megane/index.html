@@ -21,7 +21,7 @@
                 width: 100%;
                 background-color: #ffffff;
                 z-index: 1000;
-                padding: 35px 0 20px 0;
+                padding: 30px 0 20px 0; /* 上の余白を少しだけ詰めてバランスを調整 */
             }
             .header-container {
                 width: 100%;
@@ -32,19 +32,20 @@
                 box-sizing: border-box;
                 display: flex;
                 justify-content: space-between;
-                align-items: center;
+                /* 🎯 枠全体の上下の中心（ビジュアルセンター）を強制的に一致させます */
+                align-items: center; 
+                height: 24px; /* 三本線ボタンの実際の高さに揃えることでズレを完全に防ぎます */
             }
             
-            /* 開いたときの「MEGANE」の文字 */
+            /* 🎯 開いたときの「MEGANE」の文字（上下の位置関係を完全にセンターへ調整） */
             .nav-title-main {
                 margin: 0;
                 font-size: 1.15rem;   
                 font-weight: 800;     
                 letter-spacing: 3px;  
                 color: #111111;
-                line-height: 1;
-                opacity: 1;
-                transition: opacity 0.3s ease;
+                line-height: 1; /* 文字のバウンディングボックスの余計な上下の隙間をゼロにします */
+                display: inline-block;
             }
             
             /* 横一列のメニュー（2秒スライド仕様） */
@@ -52,6 +53,7 @@
                 display: flex; 
                 width: 100%; 
                 justify-content: space-between; 
+                align-items: center; /* メニューの文字もすべて上下センターに揃えます */
                 
                 opacity: 0;
                 visibility: hidden;
@@ -67,6 +69,7 @@
                 font-size: 1rem;      
                 font-weight: 800;     
                 letter-spacing: 3px;  
+                line-height: 1;
             }
             .nav-inline-links a.current-page {
                 border-bottom: 2px solid #111111;
@@ -78,11 +81,12 @@
                 display: none;
             }
             
-            /* 🎯【新設計】iPhoneのカメラや時計の裏に隠れるのを防ぐための、絶対位置（固定配置）ルール */
+            /* 🎯 三本線ボタンの位置（MEGANEの文字の上下センターと完璧に連動するように調整） */
             .gallery-menu-label {
-                position: fixed; /* 画面に対して固定します */
-                top: 25px;       /* 💡時計や電波マークの下に綺麗に潜り込ませる絶妙な高さ */
-                right: 20px;     /* 写真の右辺とピッタリ揃う位置 */
+                position: absolute; /* header-container の中を基準にして正確に配置します */
+                top: 50%;           /* 💡上から50%の場所へ配置 */
+                transform: translateY(-50%); /* 💡ボタン自身の高さの半分だけ上に戻すことで、完璧な中央揃えにします */
+                right: 20px;     
                 width: 30px;
                 height: 20px;
                 cursor: pointer;
@@ -90,7 +94,7 @@
                 flex-direction: column;
                 justify-content: space-between;
                 opacity: 1;
-                z-index: 1100;   /* 白いヘッダー（1000）よりも手前に強制配置 */
+                z-index: 1100;   
                 transition: opacity 0.3s ease;
             }
             .gallery-menu-label span {
@@ -112,7 +116,7 @@
                 display: none;
             }
             
-            /* 🎯 タップされたら、固定配置した三本線ラベルも完全に消去します */
+            /* タップされたら三本線ラベルも消去 */
             #menu-toggle:checked ~ .gallery-menu-label {
                 opacity: 0;
                 visibility: hidden;
