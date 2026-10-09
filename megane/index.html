@@ -47,7 +47,7 @@
                 transition: opacity 0.3s ease;
             }
             
-            /* 横一列のメニュー（2秒かけて滑らかに動くように設定） */
+            /* 横一列のメニュー（2秒スライド仕様） */
             .nav-inline-links {
                 display: flex; 
                 width: 100%; 
@@ -57,7 +57,6 @@
                 visibility: hidden;
                 transform: translateX(50px); 
                 
-                /* 🎯 速度を「2.0s」に修正し、心地よいスライドスピードにアジャストしました */
                 transition: opacity 2.0s ease, transform 2.0s cubic-bezier(0.16, 1, 0.3, 1), visibility 2.0s;
             }
             
@@ -78,8 +77,12 @@
             #menu-toggle {
                 display: none;
             }
-            /* 三本線ボタンの見た目 */
+            
+            /* 🎯【新設計】iPhoneのカメラや時計の裏に隠れるのを防ぐための、絶対位置（固定配置）ルール */
             .gallery-menu-label {
+                position: fixed; /* 画面に対して固定します */
+                top: 25px;       /* 💡時計や電波マークの下に綺麗に潜り込ませる絶妙な高さ */
+                right: 20px;     /* 写真の右辺とピッタリ揃う位置 */
                 width: 30px;
                 height: 20px;
                 cursor: pointer;
@@ -87,6 +90,7 @@
                 flex-direction: column;
                 justify-content: space-between;
                 opacity: 1;
+                z-index: 1100;   /* 白いヘッダー（1000）よりも手前に強制配置 */
                 transition: opacity 0.3s ease;
             }
             .gallery-menu-label span {
@@ -96,17 +100,19 @@
                 background-color: #111111;
             }
             
-            /* 🎯 三本線がタップされた瞬間の2秒スロー動き */
+            /* 三本線がタップされた瞬間の2秒スロー動き */
             #menu-toggle:checked ~ .nav-inline-links {
                 opacity: 1;
                 visibility: visible;
-                transform: translateX(0); /* 2秒かけて右端から本来の位置へスムーズに滑り出します */
+                transform: translateX(0); 
             }
             #menu-toggle:checked ~ .nav-title-main {
                 opacity: 0;
                 visibility: hidden;
                 display: none;
             }
+            
+            /* 🎯 タップされたら、固定配置した三本線ラベルも完全に消去します */
             #menu-toggle:checked ~ .gallery-menu-label {
                 opacity: 0;
                 visibility: hidden;
@@ -135,7 +141,7 @@
                 <!-- 通常時のページタイトル（太字） -->
                 <h1 class="nav-title-main">MEGANE</h1>
                 
-                <!-- タップ後に横一列で出現する4つのリンク（2秒スライド仕様） -->
+                <!-- タップ後に横一列で出現する4つのリンク -->
                 <nav class="nav-inline-links">
                     <a href="../index.html">HOME</a>
                     <a href="../megane/index.html" class="current-page">MEGANE</a>
@@ -154,6 +160,7 @@
         </header>
         
         <main class="gallery-container">
+
 
 
         <!-- ここから上にコピペする -->
