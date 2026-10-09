@@ -21,7 +21,7 @@
                 width: 100%;
                 background-color: #ffffff;
                 z-index: 1000;
-                padding: 30px 0 20px 0; /* 上の余白を少しだけ詰めてバランスを調整 */
+                padding: 30px 0 20px 0; 
             }
             .header-container {
                 width: 100%;
@@ -32,19 +32,18 @@
                 box-sizing: border-box;
                 display: flex;
                 justify-content: space-between;
-                /* 🎯 枠全体の上下の中心（ビジュアルセンター）を強制的に一致させます */
                 align-items: center; 
-                height: 24px; /* 三本線ボタンの実際の高さに揃えることでズレを完全に防ぎます */
+                height: 24px; 
             }
             
-            /* 🎯 開いたときの「MEGANE」の文字（上下の位置関係を完全にセンターへ調整） */
+            /* 開いたときの「MEGANE」の文字 */
             .nav-title-main {
                 margin: 0;
                 font-size: 1.15rem;   
                 font-weight: 800;     
                 letter-spacing: 3px;  
                 color: #111111;
-                line-height: 1; /* 文字のバウンディングボックスの余計な上下の隙間をゼロにします */
+                line-height: 1; 
                 display: inline-block;
             }
             
@@ -53,7 +52,7 @@
                 display: flex; 
                 width: 100%; 
                 justify-content: space-between; 
-                align-items: center; /* メニューの文字もすべて上下センターに揃えます */
+                align-items: center; 
                 
                 opacity: 0;
                 visibility: hidden;
@@ -81,14 +80,17 @@
                 display: none;
             }
             
-            /* 🎯 三本線ボタンの位置（MEGANEの文字の上下センターと完璧に連動するように調整） */
+            /* 🎯【新設計】右上の三本線を「MEGANE」の「E」の大きさと太さに完全一致させるスタイル */
             .gallery-menu-label {
-                position: absolute; /* header-container の中を基準にして正確に配置します */
-                top: 50%;           /* 💡上から50%の場所へ配置 */
-                transform: translateY(-50%); /* 💡ボタン自身の高さの半分だけ上に戻すことで、完璧な中央揃えにします */
+                position: absolute; 
+                top: 50%;           
+                transform: translateY(-50%); 
                 right: 20px;     
-                width: 30px;
-                height: 20px;
+                
+                /* 💡 「E」の文字のビジュアルサイズに合わせた極小・精密寸法にリサイズ */
+                width: 16px;        /* 横幅を30pxから16pxへ絞りました */
+                height: 14px;       /* 高さを20pxから14pxへ低くしました */
+                
                 cursor: pointer;
                 display: flex;
                 flex-direction: column;
@@ -97,10 +99,12 @@
                 z-index: 1100;   
                 transition: opacity 0.3s ease;
             }
+            
+            /* 🎯 三本線の1本ずつの太さ調整 */
             .gallery-menu-label span {
                 display: block;
                 width: 100%;
-                height: 2px;
+                height: 2.5px;      /* 💡 太さを2pxから「2.5px」へ太くし、Eのウエイトと同化させました */
                 background-color: #111111;
             }
             
@@ -153,7 +157,7 @@
                     <a href="../snap/index.html">SNAP</a>
                 </nav>
                 
-                <!-- 三本線メニューボタン（ラベル化） -->
+                <!-- 三本線メニューボタン（Eのサイズ同化仕様） -->
                 <label for="menu-toggle" class="gallery-menu-label">
                     <span></span>
                     <span></span>
@@ -164,6 +168,7 @@
         </header>
         
         <main class="gallery-container">
+
 
 
 
