@@ -1,188 +1,51 @@
-<!DOCTYPE html>
-<html lang="ja">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>MEGANE - KENTARO YAMAMOTO</title>
-        <!-- キープする大元のスタイルシートをそのまま読み込みます -->
-        <link rel="stylesheet" href="../style-v4.css">
-        
-        <!-- 🎯 トップページを壊さない、このページ専用のインラインメニューデザイン -->
-        <style>
-            .sub-page {
-                overflow-y: auto !important;
-                background-color: #ffffff !important;
-            }
-            
-            /* 🎯【新設計】上部の文字エリア枠を「完全に透明」にし、スクロール連動の動き（0.3秒）を追加 */
-            .gallery-header {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                background-color: transparent; /* 💡 背景を完全に透明化 */
-                z-index: 1000;
-                padding: 35px 0 20px 0;
-                
-                /* 上下にスッと隠れたり現れたりする滑らかなアニメーション設定 */
-                transition: transform 0.3s ease-in-out, background-color 0.3s ease; 
-            }
-            
-            /* 🎯 スクロールした時に、文字の視認性を保つために文字の裏側にうっすらとだけ敷くグラデーション（お好みで外せます） */
-            .gallery-header.scrolled {
-                background-color: rgba(255, 255, 255, 0.85); /* 💡 スクロール中は文字が見やすいようほんのり白半透明に */
-                backdrop-filter: blur(5px); /* 背景の写真を少しオシャレにぼかします */
-            }
-            
-            /* 🎯 下にスクロールした時に、ヘッダーを上部へ完全に隠すための命令用クラス */
-            .gallery-header.header-hide {
-                transform: translateY(-100%); /* 画面の上の外側へスッと隠します */
-            }
-            
-            .header-container {
-                width: 100%;
-                max-width: 1200px;
-                margin: 0 auto;
-                position: relative;
-                padding: 0 20px; 
-                box-sizing: border-box;
-                display: flex;
-                justify-content: space-between;
-                align-items: center; 
-                height: 24px; 
-            }
-            
-            /* 開いたときの「MEGANE」の文字 */
-            .nav-title-main {
-                margin: 0;
-                font-size: 1.15rem;   
-                font-weight: 800;     
-                letter-spacing: 3px;  
-                color: #111111;
-                line-height: 1; 
-                display: inline-block;
-            }
-            
-            /* 横一列のメニュー（2秒スライド仕様） */
-            .nav-inline-links {
-                display: flex; 
-                width: 100%; 
-                justify-content: space-between; 
-                align-items: center; 
-                
-                opacity: 0;
-                visibility: hidden;
-                transform: translateX(50px); 
-                
-                transition: opacity 2.0s ease, transform 2.0s cubic-bezier(0.16, 1, 0.3, 1), visibility 2.0s;
-            }
-            
-            /* メニュー文字 */
-            .nav-inline-links a {
-                text-decoration: none;
-                color: #111111;
-                font-size: 1rem;      
-                font-weight: 800;     
-                letter-spacing: 3px;  
-                line-height: 1;
-            }
-            .nav-inline-links a.current-page {
-                border-bottom: 2px solid #111111;
-                padding-bottom: 2px;
-            }
-            
-            /* チェックボックスを使ったCSS限定の切り替えスイッチ */
-            #menu-toggle {
-                display: none;
-            }
-            
-            /* 右上の三本線（Eのサイズ同化仕様） */
-            .gallery-menu-label {
-                position: absolute; 
-                top: 50%;           
-                transform: translateY(-50%); 
-                right: 20px;     
-                width: 16px;        
-                height: 14px;       
-                cursor: pointer;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                opacity: 1;
-                z-index: 1100;   
-                transition: opacity 0.3s ease;
-            }
-            .gallery-menu-label span {
-                display: block;
-                width: 100%;
-                height: 2.5px;      
-                background-color: #111111;
-            }
-            
-            /* 三本線がタップされた瞬間の2秒スロー動き */
-            #menu-toggle:checked ~ .nav-inline-links {
-                opacity: 1;
-                visibility: visible;
-                transform: translateX(0); 
-            }
-            #menu-toggle:checked ~ .nav-title-main {
-                opacity: 0;
-                visibility: hidden;
-                display: none;
-            }
-            
-            /* タップされたら三本線ラベルも消去 */
-            #menu-toggle:checked ~ .gallery-menu-label {
-                opacity: 0;
-                visibility: hidden;
-                display: none;
-            }
-            
-            /* 🎯【調整】背景が透明になり写真が最上部まで回り込むため、一番上の写真がヘッダーと被りすぎない絶妙な余白へ修正 */
-            .gallery-container {
-                width: 100%;
-                margin-top: 90px; 
-                padding: 0;
-            }
-            body.sub-page > .menu-trigger {
-                display: none !important;
-            }
-        </style>
-    </head>
-    <body class="sub-page">
-        
-        <!-- 🆕 スクロール連動機能を持たせた新しいヘッダー枠 -->
-        <header id="gallery-header" class="gallery-header">
-            <div class="header-container">
-                
-                <!-- CSS切り替え用の見えないスイッチ -->
-                <input type="checkbox" id="menu-toggle">
-                
-                <!-- 通常時のページタイトル（太字） -->
-                <h1 class="nav-title-main">MEGANE</h1>
-                
-                <!-- タップ後に横一列で出現する4つのリンク（並び順：現在地先頭、HOME末尾） -->
-                <nav class="nav-inline-links">
-                    <a href="../megane/index.html" class="current-page">MEGANE</a>
-                    <a href="../portrait/index.html">PORTRAIT</a>
-                    <a href="../snap/index.html">SNAP</a>
-                    <a href="../index.html">HOME</a>
-                </nav>
-                
-                <!-- 三本線メニューボタン（ラベル化） -->
-                <label for="menu-toggle" class="gallery-menu-label">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </label>
-                
-            </div>
-        </header>
-        
-        <main class="gallery-container">
+</main>
 
+<div id="lightbox" class="lightbox">
+    <span class="close-btn">&times;</span>
+    <button id="lightbox-prev" class="lightbox-nav-btn">&lsaquo;</button>
+    <img class="lightbox-content" id="lightbox-img" alt="Enlarged Image">
+    <button id="lightbox-next" class="lightbox-nav-btn">&rsaquo;</button>
+</div>
 
+<!-- 🎯【向き修正版】下を見に行くときに隠れ、上を見る動きで即座に現れるスクロールプログラム -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('gallery-header');
+            const menuToggle = document.getElementById('menu-toggle');
+            let lastScrollY = window.scrollY; // 前回のスクロール位置を記憶
+            
+            window.addEventListener('scroll', () => {
+                    // もしメニューがすでに展開されていたら、出し入れの動きを一時ストップします
+                    if (menuToggle.checked) return;
+                    
+                    const currentScrollY = window.scrollY;
+                    
+                    // 💡 1. 下の方の画像を見に行く（スクロール値が増える）とき、文字を上に隠す
+                    if (currentScrollY > lastScrollY && currentScrollY > 20) {
+                        header.classList.add('header-hide');
+                    } 
+                    // 💡 2. 上の画像を見る方向（スクロール値が減る）に少しでも動いたら、文字を即座に出現させる
+                    else if (currentScrollY < lastScrollY) {
+                        header.classList.remove('header-hide');
+                    }
+                    
+                    // 3. 画面のてっぺん付近にいるかどうかの判定（背景の白半透明の切り替え）
+                    if (currentScrollY > 50) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                    
+                    // 今回のスクロール位置を次の計算用に記憶
+                    lastScrollY = currentScrollY;
+            });
+    });
+</script>
 
+<!-- 大元の拡大用スクリプトのみを読み込みます -->
+<script src="../script.js"></script>
+</body>
+</html>
 
 
 
