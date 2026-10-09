@@ -1,10 +1,18 @@
-/* 基本設定 */
-body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+/* ★★★ 🎯 ローカルSafariの白い帯を100%消し去るための最重要設定 ★★★ */
+html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
     background-color: #ffffff;
     overflow-x: hidden;
+}
+
+/* 画面全体の縦幅を写真にフィットさせ、はみ出しを防ぎます */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .container {
@@ -257,5 +265,3 @@ body {
         max-width: 90%;
     }
 }
-
-/* 🎯 白い帯の元凶になっていた「footer」の記述をここから完全に削除しました */
