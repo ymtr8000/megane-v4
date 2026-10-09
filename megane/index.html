@@ -13,16 +13,32 @@
                 overflow-y: auto !important;
                 background-color: #ffffff !important;
             }
-            /* 上部の白い文字エリア */
+            
+            /* 🎯【新設計】上部の文字エリア枠を「完全に透明」にし、スクロール連動の動き（0.3秒）を追加 */
             .gallery-header {
                 position: fixed;
                 top: 0;
                 left: 0;
                 width: 100%;
-                background-color: #ffffff;
+                background-color: transparent; /* 💡 背景を完全に透明化 */
                 z-index: 1000;
-                padding: 30px 0 20px 0; 
+                padding: 35px 0 20px 0;
+                
+                /* 上下にスッと隠れたり現れたりする滑らかなアニメーション設定 */
+                transition: transform 0.3s ease-in-out, background-color 0.3s ease; 
             }
+            
+            /* 🎯 スクロールした時に、文字の視認性を保つために文字の裏側にうっすらとだけ敷くグラデーション（お好みで外せます） */
+            .gallery-header.scrolled {
+                background-color: rgba(255, 255, 255, 0.85); /* 💡 スクロール中は文字が見やすいようほんのり白半透明に */
+                backdrop-filter: blur(5px); /* 背景の写真を少しオシャレにぼかします */
+            }
+            
+            /* 🎯 下にスクロールした時に、ヘッダーを上部へ完全に隠すための命令用クラス */
+            .gallery-header.header-hide {
+                transform: translateY(-100%); /* 画面の上の外側へスッと隠します */
+            }
+            
             .header-container {
                 width: 100%;
                 max-width: 1200px;
@@ -122,9 +138,10 @@
                 display: none;
             }
             
+            /* 🎯【調整】背景が透明になり写真が最上部まで回り込むため、一番上の写真がヘッダーと被りすぎない絶妙な余白へ修正 */
             .gallery-container {
                 width: 100%;
-                margin-top: 100px; 
+                margin-top: 90px; 
                 padding: 0;
             }
             body.sub-page > .menu-trigger {
@@ -134,8 +151,8 @@
     </head>
     <body class="sub-page">
         
-        <!-- 新しい上部文字エリア（ヘッダー） -->
-        <header class="gallery-header">
+        <!-- 🆕 スクロール連動機能を持たせた新しいヘッダー枠 -->
+        <header id="gallery-header" class="gallery-header">
             <div class="header-container">
                 
                 <!-- CSS切り替え用の見えないスイッチ -->
@@ -144,7 +161,7 @@
                 <!-- 通常時のページタイトル（太字） -->
                 <h1 class="nav-title-main">MEGANE</h1>
                 
-                <!-- 🎯 タップ後に横一列で出現する4つのリンク（並び順を現在地先頭、HOME末尾に修正） -->
+                <!-- タップ後に横一列で出現する4つのリンク（並び順：現在地先頭、HOME末尾） -->
                 <nav class="nav-inline-links">
                     <a href="../megane/index.html" class="current-page">MEGANE</a>
                     <a href="../portrait/index.html">PORTRAIT</a>
@@ -163,6 +180,7 @@
         </header>
         
         <main class="gallery-container">
+
 
 
 
@@ -250,7 +268,44 @@
             <button id="lightbox-next" class="lightbox-nav-btn">&rsaquo;</button>
         </div>
         
+        <!-- 🎯【新機能】スクロールの上下の「向き」を一瞬で感知して、ヘッダーを出し入れするプログラム -->
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                    const header = document.getElementById('gallery-header');
+                    const menuToggle = document.getElementById('menu-toggle');
+                    let lastScrollY = window.scrollY; // 前回のスクロール位置を記憶
+                    
+                    window.addEventListener('scroll', () => {
+                            // 💡 もしメニューがすでに展開されていたら、出し入れの動きを一時ストップします
+                            if (menuToggle.checked) return;
+                            
+                            const currentScrollY = window.scrollY;
+                            
+                            // 1. 下にスクロールしている、かつ一定以上（20px以上）動いた場合はヘッダーを隠す
+                            if (currentScrollY > lastScrollY && currentScrollY > 20) {
+                                header.classList.add('header-hide');
+                            } 
+                            // 2. 上にスクロールを戻した場合は、てっぺんでなくてもその場でスッとヘッダーを出現させる
+                            else if (currentScrollY < lastScrollY) {
+                                header.classList.remove('header-hide');
+                            }
+                            
+                            // 3. 画面のてっぺん付近にいるかどうかの判定（背景の白半透明の切り替え）
+                            if (currentScrollY > 50) {
+                                header.classList.add('scrolled');
+                            } else {
+                                header.classList.remove('scrolled');
+                            }
+                            
+                            // 今回のスクロール位置を次の計算用に記憶
+                            lastScrollY = currentScrollY;
+                    });
+            });
+        </script>
+        
         <!-- 大元の拡大用スクリプトのみを読み込みます -->
         <script src="../script.js"></script>
     </body>
+</html>
+
 </html>
