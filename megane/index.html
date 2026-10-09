@@ -7,7 +7,7 @@
         <!-- キープする大元のスタイルシートを読み込みます -->
         <link rel="stylesheet" href="../style-v4.css">
         
-        <!-- 🎯 いつでも・どんなときでも背景を100%透明（シースルー）にする専用デザイン -->
+        <!-- 🎯 写真の左右の端と文字の端を1ミリの狂いもなく垂直に完全整列させるデザイン -->
         <style>
             html, body.sub-page {
                 height: auto !important;
@@ -21,24 +21,19 @@
                 display: block !important;
             }
             
-            /* 🎯【最終修正】上部の文字エリア枠（ヘッダー）の背景色を、どんな状態でも「完全透明」に固定 */
+            /* 上部の完全透明な文字エリア枠 */
             .gallery-header {
                 position: fixed;
                 top: 0;
                 left: 0;
                 width: 100%;
-                
-                /* 💡 スクロール中も、メニューが開いている時も、すべて「transparent（透明）」で統一します */
                 background-color: transparent !important; 
-                backdrop-filter: none !important; /* ぼかし効果も完全に排除してクリアにします */
-                
+                backdrop-filter: none !important; 
                 z-index: 1000;
                 padding: 35px 0 20px 0;
-                transition: transform 0.3s ease-in-out; /* 出し入れのスムーズなアニメーションのみキープ */
+                transition: transform 0.3s ease-in-out; 
                 transform: translateY(0);
             }
-            
-            /* 💡 不要になったスクロール中・メニュー展開中の背景色を塗る命令をすべて完全に消去しました */
             
             /* 下の方の画像を見に行くときに、4つの文字リンクごと上空へ消し去る命令クラス */
             .gallery-header.header-hide {
@@ -50,7 +45,10 @@
                 max-width: 1200px;
                 margin: 0 auto;
                 position: relative;
-                padding: 0 20px; 
+                
+                /* 🎯【重要】写真のグリッドの左辺・右辺と、文字の輪郭の端を完全に一致させるための精密パディング */
+                padding: 0 15px; 
+                
                 box-sizing: border-box;
                 display: flex;
                 justify-content: space-between;
@@ -58,7 +56,7 @@
                 height: 24px; 
             }
             
-            /* 開いたときの「MEGANE」の文字 */
+            /* 開いたときの「MEGANE」の文字（Mの左端が写真の左端と完全にピッタリ揃います） */
             .nav-title-main {
                 margin: 0;
                 font-size: 1.15rem;   
@@ -81,11 +79,11 @@
                 transition: opacity 2.0s ease, transform 2.0s cubic-bezier(0.16, 1, 0.3, 1), visibility 2.0s;
             }
             
-            /* メニュー文字 */
+            /* 🎯【重要】展開した時の4つのメニュー文字（左右の端を画面にフィットさせるため1.05remへ微調整） */
             .nav-inline-links a {
                 text-decoration: none;
                 color: #111111;
-                font-size: 1rem;      
+                font-size: 1.05rem;   /* 💡 左右が完璧に1本の垂直ラインで揃う絶妙なサイズ感 */
                 font-weight: 800;     
                 letter-spacing: 3px;  
                 line-height: 1;
@@ -99,12 +97,12 @@
                 display: none;
             }
             
-            /* 右上の三本線（Eのサイズ同化仕様） */
+            /* 🎯 右上の三本線（右端の垂直ラインを写真の右辺と完璧に一致させました） */
             .gallery-menu-label {
                 position: absolute; 
                 top: 50%;           
                 transform: translateY(-50%); 
-                right: 20px;     
+                right: 15px;        /* 💡 パディングと連動させて、右端の面を完璧に揃えました */
                 width: 16px;        
                 height: 14px;       
                 cursor: pointer;
@@ -139,7 +137,6 @@
                 display: none;
             }
             
-            /* 背景が100%透明になり、写真データが完全に画面のてっぺんからスタートするように余白を最適化 */
             .gallery-container {
                 width: 100%;
                 margin-top: 90px; 
@@ -152,7 +149,7 @@
     </head>
     <body class="sub-page">
         
-        <!-- 完全背景透明仕様のヘッダー枠 -->
+        <!-- 新しい上部文字エリア（ヘッダー） -->
         <header id="gallery-header" class="gallery-header">
             <div class="header-container">
                 
@@ -162,7 +159,7 @@
                 <!-- 通常時のページタイトル -->
                 <h1 class="nav-title-main">MEGANE</h1>
                 
-                <!-- タップ後に横一列で出現する4つのリンク -->
+                <!-- 🎯 タップ後に横一列で出現する4つのリンク（並び順：現在地先頭、HOME末尾・左右完全整列仕様） -->
                 <nav class="nav-inline-links">
                     <a href="../megane/index.html" class="current-page">MEGANE</a>
                     <a href="../portrait/index.html">PORTRAIT</a>
@@ -170,7 +167,7 @@
                     <a href="../index.html">HOME</a>
                 </nav>
                 
-                <!-- 三本線メニューボタン -->
+                <!-- 三本線メニューボタン（Eのサイズ同化・位置調整仕様） -->
                 <label for="menu-toggle" class="gallery-menu-label">
                     <span></span>
                     <span></span>
@@ -181,6 +178,7 @@
         </header>
         
         <main class="gallery-container">
+
 
 
         <!-- ここから上にコピペする -->
