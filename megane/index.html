@@ -28,41 +28,42 @@
                 max-width: 1200px;
                 margin: 0 auto;
                 position: relative;
-                /* 🎯 左右の余白を写真一覧（gallery-grid）の余白「20px」と完全に一致させました */
+                /* 左右の余白を写真一覧（gallery-grid）の余白「20px」と完全に一致 */
                 padding: 0 20px; 
                 box-sizing: border-box;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
             }
-            /* 左上の太字タイトル */
+            
+            /* 🎯 開いたときの「MEGANE」の文字（サイズと間隔をメニュー文字と完全統一） */
             .nav-title-main {
                 margin: 0;
-                font-size: 1.5rem;
-                font-weight: 800;
-                letter-spacing: 3px;
+                font-size: 1rem;      /* メニュー文字（1rem）と完全に統一 */
+                font-weight: 800;     /* 太さを統一 */
+                letter-spacing: 3px;  /* 文字の間隔を統一 */
                 color: #111111;
                 line-height: 1;
             }
             
-            /* 🎯【最重要】タップ後に出現する横一列の太字メニューの幅と間隔を完全最適化 */
+            /* タップ後に出現する横一列の太字メニューの幅と間隔 */
             .nav-inline-links {
                 display: none;
-                width: 100%; /* 横幅を100%いっぱいに広げます */
-                /* 🎯 左端のHOMEから右端のSNAPまでを自動計算で均等に両端揃えにするプロの魔法です */
+                width: 100%; 
                 justify-content: space-between; 
             }
             .nav-inline-links.active {
                 display: flex;
                 align-items: center;
             }
+            
+            /* 🎯 タップ後の4つのメニュー文字 */
             .nav-inline-links a {
                 text-decoration: none;
                 color: #111111;
-                /* スマホの画面幅に合わせて、文字サイズを元の1.1remから「1rem」へほんのわずかにコンパクト化し、絶対にはみ出さない安全マージンを取りました */
-                font-size: 1rem; 
-                font-weight: 800;
-                letter-spacing: 2px;
+                font-size: 1rem;      /* サイズを統一 */
+                font-weight: 800;     /* 太さを統一 */
+                letter-spacing: 3px;  /* 文字の間隔を3pxに統一 */
             }
             .nav-inline-links a.current-page {
                 border-bottom: 2px solid #111111;
@@ -142,6 +143,7 @@
         </header>
         
         <main class="gallery-container">
+
 
         <!-- ここから上にコピペする -->
         
