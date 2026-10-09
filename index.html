@@ -33,13 +33,13 @@
         <!-- 縦長写真（1200×2200）に完全に吸い付き、他スマホでも絶対にズレない高精度SVGオーバーレイ構造 -->
         <section class="hero-container">
             
-            <!-- 🎯 新しいサイズ「top-1200x2200moji-iri.jpg」を読み込みます -->
+            <!-- イラストレーターから書き出した縦長画像を確実に読み込みます -->
             <img src="images/top-1200x2200moji-ari.jpg" alt="Top Image" class="hero-img">
             
-            <!-- 🎯 新しい画像サイズに合わせて、viewBoxの基準を「0 0 1200 2200」に完全修正しました -->
+            <!-- 新しい画像サイズに合わせて、viewBoxの基準を「0 0 1200 2200」に最適化 -->
             <svg class="svg-overlay" viewBox="0 0 1200 2200" xmlns="http://w3.org">
             
-            <!-- 🎯 2200pxの高さに合わせて、文字やロゴの上にぴったり重なるよう仮の座標を新計算で配置しています -->
+            <!-- 2200pxの高さに合わせて、文字やロゴの上にぴったり重なるよう配置 -->
             <!-- MEGANE リンク -->
             <a href="megane/index.html">
                 <rect x="30" y="1480" width="600" height="95" class="clickable-area" />
@@ -62,7 +62,7 @@
             
             </svg>
             
-            <!-- 🎯 ピリオド無しの新型オン・フォトフッター -->
+            <!-- ピリオド無しの新型オン・フォトフッター（写真の上に重なります） -->
             <div class="hero-footer">
                 <p>&copy; 2026 KENTARO YAMAMOTO</p>
             </div>

@@ -1,17 +1,17 @@
 /* 基本設定 */
 html, body {
-    height: 100%;
+    /* 画面の下へのはみ出し・スクロールを許可して、白い帯が残る隙間を完全にリセットします */
+    height: auto; 
+    min-height: 100%;
     margin: 0;
     padding: 0;
     background-color: #ffffff;
-    overflow-x: hidden;
+    overflow-x: hidden; /* 横揺れを防止 */
 }
 
 body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    display: block; /* 縦固定の縛りを解いて、通常のスクロールが動く形にします */
 }
 
 .container {
@@ -20,35 +20,30 @@ body {
     padding: 0;
 }
 
-/* ★★★ 🎯 パソコン画面で白い帯を100%消し去るための新型コンテナ設定 ★★★ */
+/* パソコン時に下へのはみ出し（スクロール）を許可するコンテナ設定 */
 .hero-container {
     position: relative;
     width: 100%;
     margin: 0 auto;
     font-size: 0;
-    max-width: 500px; 
     
-    /* 🎯【新機能】パソコンの画面で、写真の高さが画面の下端を絶対に突き抜けないようにブレーキをかけます */
-    max-height: 100vh; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    /* パソコン画面の時は横幅500pxで固定。縦は写真本来の比率のまま下へはみ出させます */
+    max-width: 500px; 
+    max-height: none; /* 高さ制限を完全に解除 */
 }
 
 /* スマホ（iPhone 16など）の縦長画面で見るときは、画面幅いっぱいに自動で広げます */
 @media (max-width: 600px) {
     .hero-container {
         max-width: 100%;
-        max-height: none; /* スマホでは縦幅のブレーキを解除し、全画面にフィットさせます */
     }
 }
 
-/* 🎯 写真自体も画面の高さ（100vh）に合わせて自動で縮小し、はみ出しを防ぎます */
+/* 写真の縦幅固定を解除し、下へ突き抜けさせます */
 .hero-img {
     width: 100%;
-    max-height: 100vh;
     height: auto;
-    object-fit: contain;
+    max-height: none;
     display: block;
     margin: 0;
     padding: 0;
@@ -79,7 +74,7 @@ body {
 /* 写真の最下部に文字を重ねる新型フッターデザイン */
 .hero-footer {
     position: absolute;
-    bottom: 20px;
+    bottom: 20px; /* 写真の底辺から20px上の位置に固定されるため、白い帯の上ではなく写真の上に重なります */
     left: 0;
     width: 100%;
     text-align: center;
