@@ -3,10 +3,7 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    
-    /* 🎯 画面全体をご希望の「完全な真っ白」に固定しました */
     background-color: #ffffff; 
-    
     overflow: hidden; /* パソコン画面での余計なはみ出し・スクロールを完全に禁止します */
 }
 
@@ -14,7 +11,7 @@ body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     display: flex;
     justify-content: center;
-    align-items: center; /* 💡 写真を画面の「上下左右の真ん中」に100%完璧に浮き上がらせます */
+    align-items: center; /* 写真を画面の「上下左右の真ん中」に100%完璧に浮き上がらせます */
 }
 
 /* 画面全体のコンテナ */
@@ -27,14 +24,11 @@ body {
     padding: 0;
 }
 
-/* ★★★ 上下均等な白い余白を生み出す最重要の箱 ★★★ */
+/* 上下均等な白い余白を生み出す最重要の箱 */
 .hero-container {
     position: relative;
     width: 100%;
     font-size: 0;
-    
-    /* 🎯 横幅の上限を500pxに絞りつつ、縦幅も画面の高さの「90%」に自動縮小させます */
-    /* これにより、どんな大きさのパソコン画面でも、上下に「全く同じサイズ」の美しい白帯が生まれます */
     max-width: 500px;
     max-height: 90vh; 
 }
@@ -79,12 +73,22 @@ body {
     pointer-events: auto;
 }
 
-/* 透明リンクの設定 */
+/* 🎯【本番用】透明リンクの設定（現在はこちらだけが100%有効です） */
 .clickable-area {
     fill: transparent; 
     stroke: none;
     cursor: pointer;
 }
+
+/* 🎯【テスト用】位置合わせ用のピンク色（★前後に /* と */ をつけて、安全に一時無効化しています） */
+/* 
+.clickable-area {
+    fill: rgba(255, 192, 203, 0.6); 
+    stroke: none;
+    cursor: pointer;
+}
+*/
+
 
 /* 写真の最下部に文字を重ねるフッターデザイン */
 .hero-footer {
