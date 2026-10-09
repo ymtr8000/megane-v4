@@ -35,7 +35,7 @@
                 align-items: center;
             }
             
-            /* 🎯 開いたときの「MEGANE」の文字（メニュー文字との錯視を補正するため、1.15remへ微拡大） */
+            /* 開いたときの「MEGANE」の文字 */
             .nav-title-main {
                 margin: 0;
                 font-size: 1.15rem;   
@@ -44,21 +44,25 @@
                 color: #111111;
                 line-height: 1;
                 opacity: 1;
-                transition: opacity 0.2s ease;
+                transition: opacity 0.3s ease;
             }
             
-            /* 🎯 タップ後に出現する横一列の太字メニュー（右から左へ飛び出すアニメーションを設定） */
+            /* 🎯【新設計】ワープを防ぎ、10倍の超スローで確実に滑らせるためのメニューベース */
             .nav-inline-links {
-                display: none;
+                display: flex; /* 最初から配置の計算だけは終わらせておきます */
                 width: 100%; 
                 justify-content: space-between; 
+                
+                /* 💡 初期状態（タップ前）は、完全に透明にして、右側に50px分引っ込めて眠らせておきます */
                 opacity: 0;
-                /* 動きの初期位置を右側に少しズラしておきます */
-                transform: translateX(20px); 
-                transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); /* 滑らかな引き戸のような動き */
+                visibility: hidden;
+                transform: translateX(50px); 
+                
+                /* 🎯 速度を「4.0s（4秒）」に変更し、1/10の速度でじっくり動くように設定しました */
+                transition: opacity 2.0s ease, transform 2.0s cubic-bezier(0.16, 1, 0.3, 1), visibility 4.0s;
             }
             
-            /* メニュー文字（サイズは1remを維持してレタースペースを3pxに固定） */
+            /* メニュー文字 */
             .nav-inline-links a {
                 text-decoration: none;
                 color: #111111;
@@ -84,7 +88,7 @@
                 flex-direction: column;
                 justify-content: space-between;
                 opacity: 1;
-                transition: opacity 0.2s ease;
+                transition: opacity 0.3s ease;
             }
             .gallery-menu-label span {
                 display: block;
@@ -93,16 +97,20 @@
                 background-color: #111111;
             }
             
-            /* 🎯 三本線がタップされた（チェックが入った）瞬間の飛び出しアニメーション動作 */
+            /* 🎯 三本線がタップされた（チェックが入った）瞬間の10倍スロー動き */
             #menu-toggle:checked ~ .nav-inline-links {
-                display: flex;
                 opacity: 1;
-                transform: translateX(0); /* 本来の位置（左側）へ向かってスッと飛び出します */
+                visibility: visible;
+                transform: translateX(0); /* 4秒かけて、右端から本来の位置へじわじわと滑り出します */
             }
             #menu-toggle:checked ~ .nav-title-main {
+                opacity: 0;
+                visibility: hidden;
                 display: none;
             }
             #menu-toggle:checked ~ .gallery-menu-label {
+                opacity: 0;
+                visibility: hidden;
                 display: none;
             }
             
@@ -111,7 +119,6 @@
                 margin-top: 100px; 
                 padding: 0;
             }
-            /* 大元CSSから引き継いだトップ用の古いボタンを非表示化 */
             body.sub-page > .menu-trigger {
                 display: none !important;
             }
@@ -129,7 +136,7 @@
                 <!-- 通常時のページタイトル（太字） -->
                 <h1 class="nav-title-main">MEGANE</h1>
                 
-                <!-- タップ後に横一列で出現する4つのリンク（飛び出しアニメーション仕様） -->
+                <!-- タップ後に横一列で出現する4つのリンク（10倍スローモーション仕様） -->
                 <nav class="nav-inline-links">
                     <a href="../index.html">HOME</a>
                     <a href="../megane/index.html" class="current-page">MEGANE</a>
@@ -148,6 +155,7 @@
         </header>
         
         <main class="gallery-container">
+
 
 
 
