@@ -8,14 +8,14 @@
     </head>
     <body>
         
-        <!-- 右上の三本線メニューボタン（全ページ共通） -->
+        <!-- 右上の三本線メニューボタン（最前面に配置） -->
         <button id="menu-btn" class="menu-trigger" aria-label="メニューを開く">
             <span></span>
             <span></span>
             <span></span>
         </button>
         
-        <!-- タップ後に全面に広がるメニュー画面（全ページ共通） -->
+        <!-- タップ後に全面に広がるメニュー画面 -->
         <div id="full-menu" class="overlay-menu">
             <button id="close-btn" class="menu-close-btn">&times;</button>
             <nav class="overlay-menu-nav">
@@ -30,29 +30,35 @@
         </div>
         
         <main class="container">
-        <!-- 💡絶対にズレないSVGオーバーレイ構造 -->
+        <!-- 縦長写真に完全に吸い付き、他スマホでも絶対にズレない高精度SVGオーバーレイ構造 -->
         <section class="hero-container">
-            <!-- 送っていただいたトップ画像を表示 -->
-            <img src="images/top.jpg" alt="Top Image" class="hero-img">
             
-            <!-- 画像に100%連動する透明リンクの網 -->
-            <svg class="svg-overlay" viewBox="0 0 1000 1500" xmlns="http://w3.org">
-            <!-- MEGANE リンク -->
+            <!-- 🎯 指定のファイル名「top-1200x2600moji-iri.jpg」1枚だけをシンプルに読み込みます -->
+            <img src="images/top-1200x2600moji-iri.jpg" alt="Top Image" class="hero-img">
+            
+            <!-- 🎯 お送りいただいた「MEGANE」から「Instagramロゴ」までの実際の配置バランスを元に、高精度に座標を算出しました -->
+            <svg class="svg-overlay" viewBox="0 0 1200 2600" xmlns="http://w3.org">
+            
+            <!-- MEGANE リンク (文字と下線、余白を広めにカバー) -->
             <a href="megane/index.html">
-                <rect x="0" y="1180" width="500" height="65" class="clickable-area" />
+                <rect x="30" y="1780" width="600" height="100" class="clickable-area" />
             </a>
+            
             <!-- PORTRAIT リンク -->
             <a href="portrait/index.html">
-                <rect x="0" y="1280" width="500" height="65" class="clickable-area" />
+                <rect x="30" y="1880" width="600" height="100" class="clickable-area" />
             </a>
+            
             <!-- SNAP リンク -->
             <a href="snap/index.html">
-                <rect x="0" y="1380" width="500" height="65" class="clickable-area" />
+                <rect x="30" y="1980" width="600" height="100" class="clickable-area" />
             </a>
-            <!-- Instagram リンク（右下のロゴマークの上） -->
+            
+            <!-- Instagram リンク（右下のロゴマークの上にジャストフィット） -->
             <a href="https://instagram.com" target="_blank">
-                <rect x="920" y="1370" width="90" height="90" class="clickable-area" />
+                <rect x="1050" y="1980" width="120" height="120" class="clickable-area" />
             </a>
+            
             </svg>
         </section>
         </main>
