@@ -1,20 +1,21 @@
-/* 基本設定 */
+/* ===================================================
+   1. パソコン（画面幅が601px以上）の時の基本設定
+   =================================================== */
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    background-color: #ffffff; 
-    overflow: hidden; /* パソコン画面での余計なはみ出し・スクロールを完全に禁止します */
+    background-color: #ffffff; /* パソコン画面は完全な真っ白 */
+    overflow: hidden; /* パソコン画面での余計なスクロールを禁止 */
 }
 
 body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     display: flex;
     justify-content: center;
-    align-items: center; /* 写真を画面の「上下左右の真ん中」に100%完璧に浮き上がらせます */
+    align-items: center; /* 💡 パソコンでは上下左右の真ん中に写真を完璧に浮き上がらせます */
 }
 
-/* 画面全体のコンテナ */
 .container {
     width: 100%;
     height: 100%;
@@ -24,30 +25,46 @@ body {
     padding: 0;
 }
 
-/* 上下均等な白い余白を生み出す最重要の箱 */
+/* パソコン時に上下均等な白い余白を生み出す箱 */
 .hero-container {
     position: relative;
     width: 100%;
     font-size: 0;
     max-width: 500px;
-    max-height: 90vh; 
+    max-height: 90vh; /* 縦幅を画面の高さの90%に絞ることで、上下に美しい白帯を作ります */
 }
 
-/* スマホ（iPhone 16など）で見るときは、この制限を解除して自動で画面100%いっぱいに広げます */
+
+/* ===================================================
+   2. スマホ（画面幅が600px以下：iPhone 16など）の時の上書き設定
+   =================================================== */
 @media (max-width: 600px) {
     html, body {
-        overflow-y: auto; /* スマホでは滑らかな縦スクロールを許可します */
+        height: auto;
+        min-height: 100%;
+        overflow-y: auto; /* スマホでは滑らかな縦スクロールを許可 */
     }
+    
     body {
-        display: block;
+        display: block; /* 💡 スマホでは上下中央の固定を完全に解除して元の形に戻します */
     }
+    
+    .container {
+        display: block;
+        height: auto;
+    }
+    
+    /* 🎯 スマホでは上限を100%撤廃し、画面幅いっぱいの余白なし全画面フィットにします */
     .hero-container {
         max-width: 100%;
         max-height: none;
     }
 }
 
-/* 写真自体のサイズを箱の縦幅（90vh）に合わせて自動フィットさせます */
+
+/* ===================================================
+   3. 共通パーツの設定（写真・リンク・メニューなど）
+   =================================================== */
 .hero-img {
     width: 100%;
     height: auto;
@@ -56,6 +73,13 @@ body {
     display: block;
     margin: 0;
     padding: 0;
+}
+
+/* スマホの時は写真の高さ制限（90vh）も完全に解除します */
+@media (max-width: 600px) {
+    .hero-img {
+        max-height: none;
+    }
 }
 
 /* 画像に完全に吸い付くSVGの設定 */
@@ -73,14 +97,14 @@ body {
     pointer-events: auto;
 }
 
-/* 🎯【本番用】透明リンクの設定（現在はこちらだけが100%有効です） */
+/* 本番用の透明リンク設定 */
 .clickable-area {
     fill: transparent; 
     stroke: none;
     cursor: pointer;
 }
 
-/* 🎯【テスト用】位置合わせ用のピンク色（★前後に /* と */ をつけて、安全に一時無効化しています） */
+/* 一時無効化中のテスト用ピンク色コード（安全に眠らせています） */
 /* 
 .clickable-area {
     fill: rgba(255, 192, 203, 0.6); 
@@ -89,11 +113,10 @@ body {
 }
 */
 
-
 /* 写真の最下部に文字を重ねるフッターデザイン */
 .hero-footer {
     position: absolute;
-    bottom: 25px; /* 写真の底辺から25px上の位置に固定。白い帯の上ではなく、必ず写真の上に重ねます */
+    bottom: 25px;
     left: 0;
     width: 100%;
     text-align: center;
@@ -108,8 +131,7 @@ body {
     letter-spacing: 1px;
 }
 
-
-/* ★★★ 右上の三本線ハンバーガーボタン ★★★ */
+/* ハンバーガーボタン */
 .menu-trigger {
     position: fixed;
     top: 30px;
@@ -127,7 +149,6 @@ body {
     transition: transform 0.4s ease, opacity 0.3s ease; 
 }
 
-/* パソコン・スマホ共通でいつもの美しい黒い三本線にします */
 .menu-trigger span {
     display: block;
     width: 100%;
@@ -286,4 +307,13 @@ body {
     .lightbox-content {
         max-width: 90%;
     }
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.8rem;
+    color: #999;
+    background-color: #ffffff;
+    margin: 0;
 }
