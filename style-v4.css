@@ -1,0 +1,271 @@
+/* 基本設定 */
+html, body {
+    /* 画面の下へのはみ出し・スクロールを許可して、白い帯が残る隙間を完全にリセットします */
+    height: auto; 
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    overflow-x: hidden; /* 横揺れを防止 */
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    display: block; /* 縦固定の縛りを解いて、通常のスクロールが動く形にします */
+}
+
+.container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+}
+
+/* パソコン時に下へのはみ出し（スクロール）を許可するコンテナ設定 */
+.hero-container {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    font-size: 0;
+    
+    /* パソコン画面の時は横幅500pxで固定。縦は写真本来の比率のまま下へはみ出させます */
+    max-width: 500px; 
+    max-height: none; /* 高さ制限を完全に解除 */
+}
+
+/* スマホ（iPhone 16など）の縦長画面で見るときは、画面幅いっぱいに自動で広げます */
+@media (max-width: 600px) {
+    .hero-container {
+        max-width: 100%;
+    }
+}
+
+/* 写真の縦幅固定を解除し、下へ突き抜けさせます */
+.hero-img {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+/* 画像に完全に吸い付くSVGの設定 */
+.svg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.svg-overlay a {
+    pointer-events: auto;
+}
+
+/* 透明リンクの設定 */
+.clickable-area {
+    fill: transparent; 
+    stroke: none;
+    cursor: pointer;
+}
+
+/* 写真の最下部に文字を重ねる新型フッターデザイン */
+.hero-footer {
+    position: absolute;
+    bottom: 20px; /* 写真の底辺から20px上の位置に固定されるため、白い帯の上ではなく写真の上に重なります */
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 20;
+    pointer-events: none;
+}
+
+.hero-footer p {
+    margin: 0;
+    font-size: 0.75rem;
+    color: #ffffff; /* 完全な真っ白（ホワイト）に固定 */
+    letter-spacing: 1px;
+}
+
+
+/* ★★★ 右上の三本線ハンバーガーボタン ★★★ */
+.menu-trigger {
+    position: fixed;
+    top: 30px;
+    right: 4%;
+    width: 30px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 10000 !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0;
+    transition: transform 0.4s ease, opacity 0.3s ease; 
+}
+
+.menu-trigger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #111111;
+}
+
+.menu-trigger.menu-hidden {
+    transform: translateY(-80px);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* 全面を覆うメニュー画面 */
+.overlay-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    z-index: 20000 !important;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay-menu.active {
+    transform: translateY(0);
+}
+
+/* メニュー内のナビゲーション文字 */
+.overlay-menu-nav {
+    text-align: center;
+}
+
+.overlay-menu-nav a {
+    display: block;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.4rem;
+    letter-spacing: 4px;
+    font-weight: 300;
+    padding: 10px 0;
+}
+
+.nav-divider {
+    width: 40px;
+    height: 1px;
+    background-color: #ffffff;
+    margin: 10px auto;
+    opacity: 0.7;
+}
+
+/* メニュー画面を閉じる「×」ボタン */
+.menu-close-btn {
+    position: absolute;
+    top: 25px;
+    right: 4%;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+
+/* ギャラリーページ用設定 */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+    margin-top: 80px;
+    margin-bottom: 60px;
+    padding: 0 20px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item img:hover {
+    opacity: 0.8;
+}
+
+/* 写真拡大（ライトボックス）設定 */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 30000 !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+
+.lightbox-content {
+    max-width: 85%;
+    max-height: 85vh;
+    object-fit: contain;
+    transition: src 0.2s ease;
+}
+
+.lightbox .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 4%;
+    color: #ffffff;
+    font-size: 40px;
+    cursor: pointer;
+    z-index: 30100;
+    opacity: 0.7;
+}
+
+.lightbox-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 3rem;
+    font-weight: 100;
+    cursor: pointer;
+    padding: 20px;
+    z-index: 30100;
+    opacity: 0.4;
+    transition: opacity 0.2s ease;
+    user-select: none;
+}
+
+.lightbox-nav-btn:hover {
+    opacity: 1;
+}
+
+#lightbox-prev {
+    left: 2%;
+}
+
+#lightbox-next {
+    right: 2%;
+}
+
+@media (max-width: 600px) {
+    .lightbox-nav-btn {
+        font-size: 2rem;
+        padding: 10px;
+    }
+    .lightbox-content {
+        max-width: 90%;
+    }
+}
