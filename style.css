@@ -13,7 +13,7 @@ body {
     padding: 0;
 }
 
-/* メイン画像を表示するベース（縦横比を完全に維持して余白をゼロにする設定） */
+/* メイン画像を表示するベース */
 .hero-container {
     position: relative;
     width: 100%;
@@ -44,15 +44,33 @@ body {
     pointer-events: auto;
 }
 
-/* 🎯 ピンク色を完全に消去し、美しい透明リンクに固定しました */
+/* 透明リンクの設定 */
 .clickable-area {
     fill: transparent; 
     stroke: none;
     cursor: pointer;
 }
 
+/* 🛠️ 写真の最下部に文字を重ねる新型フッターデザイン */
+.hero-footer {
+    position: absolute;
+    bottom: 20px;          /* 下端からの浮かせ具合 */
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 20;           /* 画像よりも手前に表示 */
+    pointer-events: none;  /* リンクのクリックの邪魔をしない */
+}
 
-/* ★★★ 右上の三本線ハンバーガーボタン（最前面に強制表示） ★★★ */
+.hero-footer p {
+    margin: 0;
+    font-size: 0.75rem;    /* 少し小さめのシブいサイズ */
+    color: #888888;        /* 写真の背景に溶け込む上品なグレー（白文字にしたい場合は #ffffff ） */
+    letter-spacing: 1px;
+}
+
+
+/* ★★★ 右上の三本線ハンバーガーボタン ★★★ */
 .menu-trigger {
     position: fixed;
     top: 30px;
@@ -228,13 +246,4 @@ body {
     .lightbox-content {
         max-width: 90%;
     }
-}
-
-footer {
-    text-align: center;
-    padding: 20px 0;
-    font-size: 0.8rem;
-    color: #999;
-    background-color: #ffffff;
-    margin: 0;
 }
