@@ -80,17 +80,14 @@
                 display: none;
             }
             
-            /* 🎯【新設計】右上の三本線を「MEGANE」の「E」の大きさと太さに完全一致させるスタイル */
+            /* 右上の三本線（Eのサイズ同化仕様） */
             .gallery-menu-label {
                 position: absolute; 
                 top: 50%;           
                 transform: translateY(-50%); 
                 right: 20px;     
-                
-                /* 💡 「E」の文字のビジュアルサイズに合わせた極小・精密寸法にリサイズ */
-                width: 16px;        /* 横幅を30pxから16pxへ絞りました */
-                height: 14px;       /* 高さを20pxから14pxへ低くしました */
-                
+                width: 16px;        
+                height: 14px;       
                 cursor: pointer;
                 display: flex;
                 flex-direction: column;
@@ -99,12 +96,10 @@
                 z-index: 1100;   
                 transition: opacity 0.3s ease;
             }
-            
-            /* 🎯 三本線の1本ずつの太さ調整 */
             .gallery-menu-label span {
                 display: block;
                 width: 100%;
-                height: 2.5px;      /* 💡 太さを2pxから「2.5px」へ太くし、Eのウエイトと同化させました */
+                height: 2.5px;      
                 background-color: #111111;
             }
             
@@ -149,15 +144,15 @@
                 <!-- 通常時のページタイトル（太字） -->
                 <h1 class="nav-title-main">MEGANE</h1>
                 
-                <!-- タップ後に横一列で出現する4つのリンク -->
+                <!-- 🎯 タップ後に横一列で出現する4つのリンク（並び順を現在地先頭、HOME末尾に修正） -->
                 <nav class="nav-inline-links">
-                    <a href="../index.html">HOME</a>
                     <a href="../megane/index.html" class="current-page">MEGANE</a>
                     <a href="../portrait/index.html">PORTRAIT</a>
                     <a href="../snap/index.html">SNAP</a>
+                    <a href="../index.html">HOME</a>
                 </nav>
                 
-                <!-- 三本線メニューボタン（Eのサイズ同化仕様） -->
+                <!-- 三本線メニューボタン（ラベル化） -->
                 <label for="menu-toggle" class="gallery-menu-label">
                     <span></span>
                     <span></span>
@@ -168,6 +163,7 @@
         </header>
         
         <main class="gallery-container">
+
 
 
 
