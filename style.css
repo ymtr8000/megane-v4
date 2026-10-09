@@ -13,12 +13,20 @@ body {
     padding: 0;
 }
 
-/* メイン画像を表示するベース */
+/* パソコン・スマホで表示を自動最適化する最重要の箱 */
 .hero-container {
     position: relative;
     width: 100%;
     margin: 0 auto;
     font-size: 0;
+    max-width: 500px; 
+}
+
+/* スマホ（iPhone 16など）の縦長画面で見るときは、画面幅いっぱいに自動で広げます */
+@media (max-width: 600px) {
+    .hero-container {
+        max-width: 100%;
+    }
 }
 
 .hero-img {
@@ -54,19 +62,18 @@ body {
 /* 写真の最下部に文字を重ねる新型フッターデザイン */
 .hero-footer {
     position: absolute;
-    bottom: 20px;          /* 下端からの浮かせ具合 */
+    bottom: 20px;
     left: 0;
     width: 100%;
     text-align: center;
-    z-index: 20;           /* 画像よりも手前に表示 */
-    pointer-events: none;  /* リンクのクリックの邪魔をしない */
+    z-index: 20;
+    pointer-events: none;
 }
 
-/* 🎯 文字の色を上品なグレーから「完全な真っ白」へ上書き変更しました */
 .hero-footer p {
     margin: 0;
-    font-size: 0.75rem;    /* 少し小さめのシブいサイズ */
-    color: #ffffff;        /* 💡完全な真っ白（ホワイト）に固定 */
+    font-size: 0.75rem;
+    color: #ffffff; /* 完全な真っ白（ホワイト）に固定 */
     letter-spacing: 1px;
 }
 
@@ -122,6 +129,7 @@ body {
     transform: translateY(0);
 }
 
+/* メニュー内のナビゲーション文字 */
 .overlay-menu-nav {
     text-align: center;
 }
@@ -144,6 +152,7 @@ body {
     opacity: 0.7;
 }
 
+/* メニュー画面を閉じる「×」ボタン */
 .menu-close-btn {
     position: absolute;
     top: 25px;
@@ -248,3 +257,5 @@ body {
         max-width: 90%;
     }
 }
+
+/* 🎯 白い帯の元凶になっていた「footer」の記述をここから完全に削除しました */
