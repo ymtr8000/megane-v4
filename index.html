@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>KENTARO YAMAMOTO - Portfolio</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        
+        <!-- 右上の三本線メニューボタン（全ページ共通） -->
+        <button id="menu-btn" class="menu-trigger" aria-label="メニューを開く">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <!-- タップ後に全面に広がるメニュー画面（全ページ共通） -->
+        <div id="full-menu" class="overlay-menu">
+            <button id="close-btn" class="menu-close-btn">&times;</button>
+            <nav class="overlay-menu-nav">
+                <a href="index.html">HOME</a>
+                <div class="nav-divider"></div>
+                <a href="megane/index.html">MEGANE</a>
+                <div class="nav-divider"></div>
+                <a href="portrait/index.html">PORTRAIT</a>
+                <div class="nav-divider"></div>
+                <a href="snap/index.html">SNAP</a>
+            </nav>
+        </div>
+        
+        <main class="container">
+        <!-- 💡絶対にズレないSVGオーバーレイ構造 -->
+        <section class="hero-container">
+            <!-- 送っていただいたトップ画像を表示 -->
+            <img src="images/top.jpg" alt="Top Image" class="hero-img">
+            
+            <!-- 画像に100%連動する透明リンクの網 -->
+            <svg class="svg-overlay" viewBox="0 0 1000 1500" xmlns="http://w3.org">
+            <!-- MEGANE リンク -->
+            <a href="megane/index.html">
+                <rect x="0" y="1180" width="500" height="65" class="clickable-area" />
+            </a>
+            <!-- PORTRAIT リンク -->
+            <a href="portrait/index.html">
+                <rect x="0" y="1280" width="500" height="65" class="clickable-area" />
+            </a>
+            <!-- SNAP リンク -->
+            <a href="snap/index.html">
+                <rect x="0" y="1380" width="500" height="65" class="clickable-area" />
+            </a>
+            <!-- Instagram リンク（右下のロゴマークの上） -->
+            <a href="https://instagram.com" target="_blank">
+                <rect x="920" y="1370" width="90" height="90" class="clickable-area" />
+            </a>
+            </svg>
+        </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2026 KENTARO YAMAMOTO.</p>
+        </footer>
+        
+        <script src="script.js"></script>
+    </body>
+</html>
