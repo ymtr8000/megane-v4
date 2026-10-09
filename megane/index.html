@@ -4,39 +4,47 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>MEGANE - KENTARO YAMAMOTO</title>
-        <!-- キープする大元のスタイルシートをそのまま読み込みます -->
+        <!-- キープする大元のスタイルシートを読み込みます -->
         <link rel="stylesheet" href="../style-v4.css">
         
-        <!-- 🎯 トップページを壊さない、このページ専用のインラインメニューデザイン -->
+        <!-- 🎯 頑固なSafariのバグを力技でねじ伏せ、上下の連動を完璧にする専用デザイン -->
         <style>
-            .sub-page {
-                overflow-y: auto !important;
+            /* 💡 大元CSSの古いスクロール命令を強制上書きして、今回の動きを100%正常化します */
+            html, body.sub-page {
+                height: auto !important;
+                min-height: 100% !important;
+                overflow-x: hidden !important;
+                overflow-y: scroll !important; /* スクロールの検知漏れを完全に防ぐ */
                 background-color: #ffffff !important;
             }
             
-            /* 🎯【新設計】上部の文字エリア枠を「完全に透明」にし、スクロール連動の動き（0.3秒）を追加 */
+            body.sub-page {
+                display: block !important;
+            }
+            
+            /* 上部の透明な文字エリア */
             .gallery-header {
                 position: fixed;
                 top: 0;
                 left: 0;
                 width: 100%;
-                background-color: transparent; /* 💡 背景を完全に透明化 */
+                background-color: transparent; 
                 z-index: 1000;
                 padding: 35px 0 20px 0;
-                
-                /* 上下にスッと隠れたり現れたりする滑らかなアニメーション設定 */
+                /* 💡 文字が上下に出し入れされるアニメーション速度を「0.3秒」に設定 */
                 transition: transform 0.3s ease-in-out, background-color 0.3s ease; 
+                transform: translateY(0);
             }
             
-            /* 🎯 スクロールした時に、文字の視認性を保つために文字の裏側にうっすらとだけ敷くグラデーション（お好みで外せます） */
+            /* スクロール中に文字の裏側に敷く白半透明のセーフティ */
             .gallery-header.scrolled {
-                background-color: rgba(255, 255, 255, 0.85); /* 💡 スクロール中は文字が見やすいようほんのり白半透明に */
-                backdrop-filter: blur(5px); /* 背景の写真を少しオシャレにぼかします */
+                background-color: rgba(255, 255, 255, 0.85); 
+                backdrop-filter: blur(5px); 
             }
             
-            /* 🎯 下にスクロールした時に、ヘッダーを上部へ完全に隠すための命令用クラス */
+            /* 🎯【最重要】下の方の画像を見に行くときに、文字エリアを上空へ消し去る命令クラス */
             .gallery-header.header-hide {
-                transform: translateY(-100%); /* 画面の上の外側へスッと隠します */
+                transform: translateY(-100%) !important; 
             }
             
             .header-container {
@@ -69,11 +77,9 @@
                 width: 100%; 
                 justify-content: space-between; 
                 align-items: center; 
-                
                 opacity: 0;
                 visibility: hidden;
                 transform: translateX(50px); 
-                
                 transition: opacity 2.0s ease, transform 2.0s cubic-bezier(0.16, 1, 0.3, 1), visibility 2.0s;
             }
             
@@ -91,7 +97,6 @@
                 padding-bottom: 2px;
             }
             
-            /* チェックボックスを使ったCSS限定の切り替えスイッチ */
             #menu-toggle {
                 display: none;
             }
@@ -130,18 +135,15 @@
                 visibility: hidden;
                 display: none;
             }
-            
-            /* タップされたら三本線ラベルも消去 */
             #menu-toggle:checked ~ .gallery-menu-label {
                 opacity: 0;
                 visibility: hidden;
                 display: none;
             }
             
-            /* 🎯【調整】背景が透明になり写真が最上部まで回り込むため、一番上の写真がヘッダーと被りすぎない絶妙な余白へ修正 */
             .gallery-container {
                 width: 100%;
-                margin-top: 90px; 
+                margin-top: 100px; 
                 padding: 0;
             }
             body.sub-page > .menu-trigger {
@@ -151,7 +153,7 @@
     </head>
     <body class="sub-page">
         
-        <!-- 🆕 スクロール連動機能を持たせた新しいヘッダー枠 -->
+        <!-- 新しい上部文字エリア（ヘッダー） -->
         <header id="gallery-header" class="gallery-header">
             <div class="header-container">
                 
@@ -161,7 +163,7 @@
                 <!-- 通常時のページタイトル（太字） -->
                 <h1 class="nav-title-main">MEGANE</h1>
                 
-                <!-- タップ後に横一列で出現する4つのリンク（並び順：現在地先頭、HOME末尾） -->
+                <!-- タップ後に横一列で出現する4つのリンク -->
                 <nav class="nav-inline-links">
                     <a href="../megane/index.html" class="current-page">MEGANE</a>
                     <a href="../portrait/index.html">PORTRAIT</a>
@@ -169,7 +171,7 @@
                     <a href="../index.html">HOME</a>
                 </nav>
                 
-                <!-- 三本線メニューボタン（ラベル化） -->
+                <!-- 三本線メニューボタン -->
                 <label for="menu-toggle" class="gallery-menu-label">
                     <span></span>
                     <span></span>
@@ -180,7 +182,6 @@
         </header>
         
         <main class="gallery-container">
-
 
 
 
@@ -261,7 +262,6 @@
         <!-- 写真拡大用（ライトボックス） -->
         
         <!-- ここから下にコピペ -->
-        
         </main>
         
         <div id="lightbox" class="lightbox">
@@ -271,38 +271,39 @@
             <button id="lightbox-next" class="lightbox-nav-btn">&rsaquo;</button>
         </div>
         
-        <!-- 🎯【向き修正版】下を見に行くときに隠れ、上を見る動きで即座に現れるスクロールプログラム -->
+        <!-- 🎯【決定版】下を見に行くときに隠れ、上を見る動きで即座に現れる新型スクロールプログラム -->
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                     const header = document.getElementById('gallery-header');
                     const menuToggle = document.getElementById('menu-toggle');
-                    let lastScrollY = window.scrollY; // 前回のスクロール位置を記憶
+                    
+                    let lastScrollY = window.pageYOffset || document.documentElement.scrollTop;
                     
                     window.addEventListener('scroll', () => {
-                            // もしメニューがすでに展開されていたら、出し入れの動きを一時ストップします
+                            // メニューがすでに開いている時は、出し入れの処理を一時ストップします
                             if (menuToggle.checked) return;
                             
-                            const currentScrollY = window.scrollY;
+                            const currentScrollY = window.pageYOffset || document.documentElement.scrollTop;
                             
-                            // 💡 1. 下の方の画像を見に行く（スクロール値が増える）とき、文字を上に隠す
-                            if (currentScrollY > lastScrollY && currentScrollY > 20) {
+                            // 💡 1. 下の方の画像を見に行く（スクロール値が増える）とき、文字を上空へ隠す
+                            if (currentScrollY > lastScrollY && currentScrollY > 50) {
                                 header.classList.add('header-hide');
                             } 
-                            // 💡 2. 上の画像を見る方向（スクロール値が減る）に少しでも動いたら、文字を即座に出現させる
+                            // 💡 2. 上の画像を見る方向（スクロール値が減る）に動いた瞬間、文字をその場にスッと出現させる
                             else if (currentScrollY < lastScrollY) {
                                 header.classList.remove('header-hide');
                             }
                             
-                            // 3. 画面のてっぺん付近にいるかどうかの判定（背景の白半透明の切り替え）
-                            if (currentScrollY > 50) {
+                            // 3. 画面のてっぺん付近（最上部）にいるかどうかの白半透明切り替え
+                            if (currentScrollY > 30) {
                                 header.classList.add('scrolled');
                             } else {
                                 header.classList.remove('scrolled');
                             }
                             
-                            // 今回のスクロール位置を次の計算用に記憶
-                            lastScrollY = currentScrollY;
-                    });
+                            // 今回のスクロール位置を正確に記憶
+                            lastScrollY = currentScrollY <= 0 ? 0 : currentScrollY;
+                    }, { passive: true });
             });
         </script>
         
