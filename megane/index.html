@@ -7,7 +7,7 @@
         <!-- キープする大元のスタイルシートを読み込みます -->
         <link rel="stylesheet" href="../style-v4.css">
         
-        <!-- 🎯 4つのリンクが出ている状態でも、背景透明＆出し入れを完璧に行う専用デザイン -->
+        <!-- 🎯 いつでも・どんなときでも背景を100%透明（シースルー）にする専用デザイン -->
         <style>
             html, body.sub-page {
                 height: auto !important;
@@ -21,25 +21,24 @@
                 display: block !important;
             }
             
-            /* 上部の白い文字エリア（初期状態は完全透明） */
+            /* 🎯【最終修正】上部の文字エリア枠（ヘッダー）の背景色を、どんな状態でも「完全透明」に固定 */
             .gallery-header {
                 position: fixed;
                 top: 0;
                 left: 0;
                 width: 100%;
-                background-color: transparent; /* 💡 メニュー展開時もベースは完全透明を維持 */
+                
+                /* 💡 スクロール中も、メニューが開いている時も、すべて「transparent（透明）」で統一します */
+                background-color: transparent !important; 
+                backdrop-filter: none !important; /* ぼかし効果も完全に排除してクリアにします */
+                
                 z-index: 1000;
                 padding: 35px 0 20px 0;
-                transition: transform 0.3s ease-in-out, background-color 0.3s ease; 
+                transition: transform 0.3s ease-in-out; /* 出し入れのスムーズなアニメーションのみキープ */
                 transform: translateY(0);
             }
             
-            /* 🎯【新設計】スクロール中、およびメニュー展開中（.menu-opened）でも文字が見えやすいよう、うっすらと白半透明を敷く設定 */
-            .gallery-header.scrolled,
-            .gallery-header.menu-opened {
-                background-color: rgba(255, 255, 255, 0.85); 
-                backdrop-filter: blur(5px); 
-            }
+            /* 💡 不要になったスクロール中・メニュー展開中の背景色を塗る命令をすべて完全に消去しました */
             
             /* 下の方の画像を見に行くときに、4つの文字リンクごと上空へ消し去る命令クラス */
             .gallery-header.header-hide {
@@ -140,9 +139,10 @@
                 display: none;
             }
             
+            /* 背景が100%透明になり、写真データが完全に画面のてっぺんからスタートするように余白を最適化 */
             .gallery-container {
                 width: 100%;
-                margin-top: 100px; 
+                margin-top: 90px; 
                 padding: 0;
             }
             body.sub-page > .menu-trigger {
@@ -152,14 +152,14 @@
     </head>
     <body class="sub-page">
         
-        <!-- スクロール連動機能を持たせた新しいヘッダー枠 -->
+        <!-- 完全背景透明仕様のヘッダー枠 -->
         <header id="gallery-header" class="gallery-header">
             <div class="header-container">
                 
                 <!-- CSS切り替え用の見えないスイッチ -->
                 <input type="checkbox" id="menu-toggle">
                 
-                <!-- 通常時のページタイトル（太字） -->
+                <!-- 通常時のページタイトル -->
                 <h1 class="nav-title-main">MEGANE</h1>
                 
                 <!-- タップ後に横一列で出現する4つのリンク -->
@@ -181,7 +181,6 @@
         </header>
         
         <main class="gallery-container">
-
 
 
         <!-- ここから上にコピペする -->
