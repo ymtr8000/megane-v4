@@ -47,19 +47,18 @@
                 transition: opacity 0.3s ease;
             }
             
-            /* 🎯【新設計】ワープを防ぎ、10倍の超スローで確実に滑らせるためのメニューベース */
+            /* 横一列のメニュー（2秒かけて滑らかに動くように設定） */
             .nav-inline-links {
-                display: flex; /* 最初から配置の計算だけは終わらせておきます */
+                display: flex; 
                 width: 100%; 
                 justify-content: space-between; 
                 
-                /* 💡 初期状態（タップ前）は、完全に透明にして、右側に50px分引っ込めて眠らせておきます */
                 opacity: 0;
                 visibility: hidden;
                 transform: translateX(50px); 
                 
-                /* 🎯 速度を「4.0s（4秒）」に変更し、1/10の速度でじっくり動くように設定しました */
-                transition: opacity 2.0s ease, transform 2.0s cubic-bezier(0.16, 1, 0.3, 1), visibility 4.0s;
+                /* 🎯 速度を「2.0s」に修正し、心地よいスライドスピードにアジャストしました */
+                transition: opacity 2.0s ease, transform 2.0s cubic-bezier(0.16, 1, 0.3, 1), visibility 2.0s;
             }
             
             /* メニュー文字 */
@@ -97,11 +96,11 @@
                 background-color: #111111;
             }
             
-            /* 🎯 三本線がタップされた（チェックが入った）瞬間の10倍スロー動き */
+            /* 🎯 三本線がタップされた瞬間の2秒スロー動き */
             #menu-toggle:checked ~ .nav-inline-links {
                 opacity: 1;
                 visibility: visible;
-                transform: translateX(0); /* 4秒かけて、右端から本来の位置へじわじわと滑り出します */
+                transform: translateX(0); /* 2秒かけて右端から本来の位置へスムーズに滑り出します */
             }
             #menu-toggle:checked ~ .nav-title-main {
                 opacity: 0;
@@ -136,7 +135,7 @@
                 <!-- 通常時のページタイトル（太字） -->
                 <h1 class="nav-title-main">MEGANE</h1>
                 
-                <!-- タップ後に横一列で出現する4つのリンク（10倍スローモーション仕様） -->
+                <!-- タップ後に横一列で出現する4つのリンク（2秒スライド仕様） -->
                 <nav class="nav-inline-links">
                     <a href="../index.html">HOME</a>
                     <a href="../megane/index.html" class="current-page">MEGANE</a>
@@ -155,8 +154,6 @@
         </header>
         
         <main class="gallery-container">
-
-
 
 
         <!-- ここから上にコピペする -->
