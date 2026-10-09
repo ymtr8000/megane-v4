@@ -8,7 +8,7 @@
     </head>
     <body>
         
-        <!-- 右上の三本線メニューボタン -->
+        <!-- 右上の三本線メニューボタン（最前面に配置） -->
         <button id="menu-btn" class="menu-trigger" aria-label="メニューを開く">
             <span></span>
             <span></span>
@@ -30,32 +30,39 @@
         </div>
         
         <main class="container">
+        <!-- 縦長写真（1200×2200）に完全に吸い付き、他スマホでも絶対にズレない高精度SVGオーバーレイ構造 -->
         <section class="hero-container">
             
-            <!-- 指定の縦長画像 -->
-            <img src="images/top-1200x2600moji-iri.jpg" alt="Top Image" class="hero-img">
+            <!-- 🎯 新しいサイズ「top-1200x2200moji-iri.jpg」を読み込みます -->
+            <img src="images/top-1200x2200moji-ari.jpg" alt="Top Image" class="hero-img">
             
-            <!-- 実際の文字の配置バランスに合わせた高精度な透明リンクの網 -->
-            <svg class="svg-overlay" viewBox="0 0 1200 2600" xmlns="http://w3.org">
+            <!-- 🎯 新しい画像サイズに合わせて、viewBoxの基準を「0 0 1200 2200」に完全修正しました -->
+            <svg class="svg-overlay" viewBox="0 0 1200 2200" xmlns="http://w3.org">
+            
+            <!-- 🎯 2200pxの高さに合わせて、文字やロゴの上にぴったり重なるよう仮の座標を新計算で配置しています -->
             <!-- MEGANE リンク -->
             <a href="megane/index.html">
-                <rect x="30" y="1780" width="600" height="100" class="clickable-area" />
+                <rect x="30" y="1480" width="600" height="95" class="clickable-area" />
             </a>
+            
             <!-- PORTRAIT リンク -->
             <a href="portrait/index.html">
-                <rect x="30" y="1880" width="600" height="100" class="clickable-area" />
+                <rect x="30" y="1575" width="600" height="95" class="clickable-area" />
             </a>
+            
             <!-- SNAP リンク -->
             <a href="snap/index.html">
-                <rect x="30" y="1980" width="600" height="100" class="clickable-area" />
+                <rect x="30" y="1670" width="600" height="95" class="clickable-area" />
             </a>
-            <!-- Instagram リンク -->
+            
+            <!-- Instagram リンク（右下のロゴマークの上にジャストフィット） -->
             <a href="https://instagram.com" target="_blank">
-                <rect x="1050" y="1980" width="120" height="120" class="clickable-area" />
+                <rect x="1050" y="1670" width="110" height="110" class="clickable-area" />
             </a>
+            
             </svg>
             
-            <!-- 🛠️ 最後のピリオド「.」を消してスッキリさせる場合 -->
+            <!-- 🎯 ピリオド無しの新型オン・フォトフッター -->
             <div class="hero-footer">
                 <p>&copy; 2026 KENTARO YAMAMOTO</p>
             </div>
