@@ -4,10 +4,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>MEGANE - KENTARO YAMAMOTO</title>
-        <!-- 大元の共通スタイルシートを読み込みます -->
+        <!-- キープする大元のスタイルシートをそのまま読み込みます -->
         <link rel="stylesheet" href="../style-v4.css">
         
-        <!-- 🎯 トップに影響を与えない、このページ専用の文字エリアデザイン -->
+        <!-- 🎯 トップページを壊さない、このページ専用のインラインメニューデザイン -->
         <style>
             .sub-page {
                 overflow-y: auto !important;
@@ -28,7 +28,8 @@
                 max-width: 1200px;
                 margin: 0 auto;
                 position: relative;
-                padding: 0 4%;
+                /* 🎯 左右の余白を写真一覧（gallery-grid）の余白「20px」と完全に一致させました */
+                padding: 0 20px; 
                 box-sizing: border-box;
                 display: flex;
                 justify-content: space-between;
@@ -43,15 +44,23 @@
                 color: #111111;
                 line-height: 1;
             }
-            /* タップ後に出現する横一列の太字メニュー */
+            
+            /* 🎯【最重要】タップ後に出現する横一列の太字メニューの幅と間隔を完全最適化 */
             .nav-inline-links {
                 display: none;
-                gap: 25px;
+                width: 100%; /* 横幅を100%いっぱいに広げます */
+                /* 🎯 左端のHOMEから右端のSNAPまでを自動計算で均等に両端揃えにするプロの魔法です */
+                justify-content: space-between; 
+            }
+            .nav-inline-links.active {
+                display: flex;
+                align-items: center;
             }
             .nav-inline-links a {
                 text-decoration: none;
                 color: #111111;
-                font-size: 1.1rem;
+                /* スマホの画面幅に合わせて、文字サイズを元の1.1remから「1rem」へほんのわずかにコンパクト化し、絶対にはみ出さない安全マージンを取りました */
+                font-size: 1rem; 
                 font-weight: 800;
                 letter-spacing: 2px;
             }
@@ -60,7 +69,7 @@
                 padding-bottom: 2px;
             }
             
-            /* 🎯 チェックボックスを使ったCSS限定の切り替えスイッチ */
+            /* チェックボックスを使ったCSS限定の切り替えスイッチ */
             #menu-toggle {
                 display: none;
             }
@@ -80,7 +89,7 @@
                 background-color: #111111;
             }
             
-            /* 🎯 三本線がタップされた（チェックが入った）瞬間の動き */
+            /* 三本線がタップされた瞬間の動き */
             #menu-toggle:checked ~ .nav-inline-links {
                 display: flex;
             }
@@ -93,10 +102,10 @@
             
             .gallery-container {
                 width: 100%;
-                margin-top: 100px;
+                margin-top: 100px; /* 文字エリアに写真が被らないように下げる */
                 padding: 0;
             }
-            /* トップ用の古いボタンを非表示化 */
+            /* 大元CSSから引き継いだトップ用の古いボタンを非表示化 */
             body.sub-page > .menu-trigger {
                 display: none !important;
             }
@@ -114,7 +123,7 @@
                 <!-- 通常時のページタイトル（太字） -->
                 <h1 class="nav-title-main">MEGANE</h1>
                 
-                <!-- タップ後に横一列で出現する4つのリンク -->
+                <!-- タップ後に横一列で出現する4つのリンク（両端揃え仕様） -->
                 <nav class="nav-inline-links">
                     <a href="../index.html">HOME</a>
                     <a href="../megane/index.html" class="current-page">MEGANE</a>
@@ -134,6 +143,8 @@
         
         <main class="gallery-container">
 
+        <!-- ここから上にコピペする -->
+        
         <!-- 写真だけを並べるギャラリー -->
         <section class="gallery">
             <div class="gallery-grid">
