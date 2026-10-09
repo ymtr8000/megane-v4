@@ -51,7 +51,7 @@ body {
     cursor: pointer;
 }
 
-/* 🛠️ 写真の最下部に文字を重ねる新型フッターデザイン */
+/* 写真の最下部に文字を重ねる新型フッターデザイン */
 .hero-footer {
     position: absolute;
     bottom: 20px;          /* 下端からの浮かせ具合 */
@@ -62,10 +62,11 @@ body {
     pointer-events: none;  /* リンクのクリックの邪魔をしない */
 }
 
+/* 🎯 文字の色を上品なグレーから「完全な真っ白」へ上書き変更しました */
 .hero-footer p {
     margin: 0;
     font-size: 0.75rem;    /* 少し小さめのシブいサイズ */
-    color: #888888;        /* 写真の背景に溶け込む上品なグレー（白文字にしたい場合は #ffffff ） */
+    color: #ffffff;        /* 💡完全な真っ白（ホワイト）に固定 */
     letter-spacing: 1px;
 }
 
