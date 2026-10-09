@@ -1,49 +1,64 @@
 /* 基本設定 */
 html, body {
-    /* 画面の下へのはみ出し・スクロールを許可して、白い帯が残る隙間を完全にリセットします */
-    height: auto; 
-    min-height: 100%;
+    height: 100%;
     margin: 0;
     padding: 0;
-    background-color: #ffffff;
-    overflow-x: hidden; /* 横揺れを防止 */
+    
+    /* 🎯 画面全体をご希望の「完全な真っ白」に固定しました */
+    background-color: #ffffff; 
+    
+    overflow: hidden; /* パソコン画面での余計なはみ出し・スクロールを完全に禁止します */
 }
 
 body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
-    display: block; /* 縦固定の縛りを解いて、通常のスクロールが動く形にします */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* 💡 写真を画面の「上下左右の真ん中」に100%完璧に浮き上がらせます */
 }
 
+/* 画面全体のコンテナ */
 .container {
     width: 100%;
-    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 0;
 }
 
-/* パソコン時に下へのはみ出し（スクロール）を許可するコンテナ設定 */
+/* ★★★ 上下均等な白い余白を生み出す最重要の箱 ★★★ */
 .hero-container {
     position: relative;
     width: 100%;
-    margin: 0 auto;
     font-size: 0;
     
-    /* パソコン画面の時は横幅500pxで固定。縦は写真本来の比率のまま下へはみ出させます */
-    max-width: 500px; 
-    max-height: none; /* 高さ制限を完全に解除 */
+    /* 🎯 横幅の上限を500pxに絞りつつ、縦幅も画面の高さの「90%」に自動縮小させます */
+    /* これにより、どんな大きさのパソコン画面でも、上下に「全く同じサイズ」の美しい白帯が生まれます */
+    max-width: 500px;
+    max-height: 90vh; 
 }
 
-/* スマホ（iPhone 16など）の縦長画面で見るときは、画面幅いっぱいに自動で広げます */
+/* スマホ（iPhone 16など）で見るときは、この制限を解除して自動で画面100%いっぱいに広げます */
 @media (max-width: 600px) {
+    html, body {
+        overflow-y: auto; /* スマホでは滑らかな縦スクロールを許可します */
+    }
+    body {
+        display: block;
+    }
     .hero-container {
         max-width: 100%;
+        max-height: none;
     }
 }
 
-/* 写真の縦幅固定を解除し、下へ突き抜けさせます */
+/* 写真自体のサイズを箱の縦幅（90vh）に合わせて自動フィットさせます */
 .hero-img {
     width: 100%;
     height: auto;
-    max-height: none;
+    max-height: 90vh;
+    object-fit: contain;
     display: block;
     margin: 0;
     padding: 0;
@@ -71,10 +86,10 @@ body {
     cursor: pointer;
 }
 
-/* 写真の最下部に文字を重ねる新型フッターデザイン */
+/* 写真の最下部に文字を重ねるフッターデザイン */
 .hero-footer {
     position: absolute;
-    bottom: 20px; /* 写真の底辺から20px上の位置に固定されるため、白い帯の上ではなく写真の上に重なります */
+    bottom: 25px; /* 写真の底辺から25px上の位置に固定。白い帯の上ではなく、必ず写真の上に重ねます */
     left: 0;
     width: 100%;
     text-align: center;
@@ -85,7 +100,7 @@ body {
 .hero-footer p {
     margin: 0;
     font-size: 0.75rem;
-    color: #ffffff; /* 完全な真っ白（ホワイト）に固定 */
+    color: #ffffff; /* 写真のグレーの上に映える、くっきりとした真っ白に固定 */
     letter-spacing: 1px;
 }
 
@@ -108,11 +123,12 @@ body {
     transition: transform 0.4s ease, opacity 0.3s ease; 
 }
 
+/* パソコン・スマホ共通でいつもの美しい黒い三本線にします */
 .menu-trigger span {
     display: block;
     width: 100%;
     height: 2px;
-    background-color: #111111;
+    background-color: #111111; 
 }
 
 .menu-trigger.menu-hidden {
@@ -141,7 +157,6 @@ body {
     transform: translateY(0);
 }
 
-/* メニュー内のナビゲーション文字 */
 .overlay-menu-nav {
     text-align: center;
 }
@@ -164,7 +179,6 @@ body {
     opacity: 0.7;
 }
 
-/* メニュー画面を閉じる「×」ボタン */
 .menu-close-btn {
     position: absolute;
     top: 25px;
