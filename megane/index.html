@@ -7,14 +7,13 @@
         <!-- キープする大元のスタイルシートを読み込みます -->
         <link rel="stylesheet" href="../style-v4.css">
         
-        <!-- 🎯 頑固なSafariのバグを力技でねじ伏せ、上下の連動を完璧にする専用デザイン -->
+        <!-- 🎯 4つのリンクが出ている状態でも、背景透明＆出し入れを完璧に行う専用デザイン -->
         <style>
-            /* 💡 大元CSSの古いスクロール命令を強制上書きして、今回の動きを100%正常化します */
             html, body.sub-page {
                 height: auto !important;
                 min-height: 100% !important;
                 overflow-x: hidden !important;
-                overflow-y: scroll !important; /* スクロールの検知漏れを完全に防ぐ */
+                overflow-y: scroll !important; 
                 background-color: #ffffff !important;
             }
             
@@ -22,27 +21,27 @@
                 display: block !important;
             }
             
-            /* 上部の透明な文字エリア */
+            /* 上部の白い文字エリア（初期状態は完全透明） */
             .gallery-header {
                 position: fixed;
                 top: 0;
                 left: 0;
                 width: 100%;
-                background-color: transparent; 
+                background-color: transparent; /* 💡 メニュー展開時もベースは完全透明を維持 */
                 z-index: 1000;
                 padding: 35px 0 20px 0;
-                /* 💡 文字が上下に出し入れされるアニメーション速度を「0.3秒」に設定 */
                 transition: transform 0.3s ease-in-out, background-color 0.3s ease; 
                 transform: translateY(0);
             }
             
-            /* スクロール中に文字の裏側に敷く白半透明のセーフティ */
-            .gallery-header.scrolled {
+            /* 🎯【新設計】スクロール中、およびメニュー展開中（.menu-opened）でも文字が見えやすいよう、うっすらと白半透明を敷く設定 */
+            .gallery-header.scrolled,
+            .gallery-header.menu-opened {
                 background-color: rgba(255, 255, 255, 0.85); 
                 backdrop-filter: blur(5px); 
             }
             
-            /* 🎯【最重要】下の方の画像を見に行くときに、文字エリアを上空へ消し去る命令クラス */
+            /* 下の方の画像を見に行くときに、4つの文字リンクごと上空へ消し去る命令クラス */
             .gallery-header.header-hide {
                 transform: translateY(-100%) !important; 
             }
@@ -153,7 +152,7 @@
     </head>
     <body class="sub-page">
         
-        <!-- 新しい上部文字エリア（ヘッダー） -->
+        <!-- スクロール連動機能を持たせた新しいヘッダー枠 -->
         <header id="gallery-header" class="gallery-header">
             <div class="header-container">
                 
@@ -182,8 +181,6 @@
         </header>
         
         <main class="gallery-container">
-
-
 
 
 
@@ -271,7 +268,7 @@
             <button id="lightbox-next" class="lightbox-nav-btn">&rsaquo;</button>
         </div>
         
-        <!-- 🎯【決定版】下を見に行くときに隠れ、上を見る動きで即座に現れる新型スクロールプログラム -->
+        <!-- 🎯【メニュー展開対応版】リンクが出現していても、スクロールに合わせて丸ごと出し入れする最新プログラム -->
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                     const header = document.getElementById('gallery-header');
@@ -279,17 +276,24 @@
                     
                     let lastScrollY = window.pageYOffset || document.documentElement.scrollTop;
                     
+                    // 💡 三本線がタップされてメニューが開いたことを検知する設定
+                    menuToggle.addEventListener('change', () => {
+                            if (menuToggle.checked) {
+                                header.classList.add('menu-opened'); // 開いている間はうっすら白半透明を敷く
+                            } else {
+                                header.classList.remove('menu-opened');
+                            }
+                    });
+                    
                     window.addEventListener('scroll', () => {
-                            // メニューがすでに開いている時は、出し入れの処理を一時ストップします
-                            if (menuToggle.checked) return;
-                            
                             const currentScrollY = window.pageYOffset || document.documentElement.scrollTop;
                             
-                            // 💡 1. 下の方の画像を見に行く（スクロール値が増える）とき、文字を上空へ隠す
+                            // 💡 メニューが開いている（4つのリンクが出ている）状態でも、容赦なく上下にスライド出し入れさせます
+                            // 1. 下の方の画像を見に行くとき、文字エリア全体を上空へ隠す
                             if (currentScrollY > lastScrollY && currentScrollY > 50) {
                                 header.classList.add('header-hide');
                             } 
-                            // 💡 2. 上の画像を見る方向（スクロール値が減る）に動いた瞬間、文字をその場にスッと出現させる
+                            // 2. 上の画像を見る方向に動いた瞬間、4つのリンクごとスッと出現させる
                             else if (currentScrollY < lastScrollY) {
                                 header.classList.remove('header-hide');
                             }
@@ -301,7 +305,6 @@
                                 header.classList.remove('scrolled');
                             }
                             
-                            // 今回のスクロール位置を正確に記憶
                             lastScrollY = currentScrollY <= 0 ? 0 : currentScrollY;
                     }, { passive: true });
             });
