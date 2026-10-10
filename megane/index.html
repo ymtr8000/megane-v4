@@ -7,7 +7,7 @@
         <!-- キープする大元のスタイルシートを読み込みます -->
         <link rel="stylesheet" href="../style-v4.css">
         
-        <!-- 🎯 写真の左右の端と文字の端を1ミリの狂いもなく垂直に完全整列させるデザイン -->
+        <!-- 🎯 画面幅に完璧に収め、HOMEの右端はみ出しを確実に解決するデザイン -->
         <style>
             html, body.sub-page {
                 height: auto !important;
@@ -35,7 +35,7 @@
                 transform: translateY(0);
             }
             
-            /* 下の方の画像を見に行くときに、4つの文字リンクごと上空へ消し去る命令クラス */
+            /* 下の方の画像を見に行くときに、文字エリアを上空へ消し去る命令クラス */
             .gallery-header.header-hide {
                 transform: translateY(-100%) !important; 
             }
@@ -46,8 +46,8 @@
                 margin: 0 auto;
                 position: relative;
                 
-                /* 🎯【重要】写真のグリッドの左辺・右辺と、文字の輪郭の端を完全に一致させるための精密パディング */
-                padding: 0 15px; 
+                /* 🎯 写真一覧のグリッド（左右20px空き）と外枠のラインを完全に一致させます */
+                padding: 0 20px; 
                 
                 box-sizing: border-box;
                 display: flex;
@@ -56,12 +56,12 @@
                 height: 24px; 
             }
             
-            /* 開いたときの「MEGANE」の文字（Mの左端が写真の左端と完全にピッタリ揃います） */
+            /* 🎯 開いたときの「MEGANE」の文字（サイズと間隔をメニュー文字と完全同期） */
             .nav-title-main {
                 margin: 0;
-                font-size: 1.15rem;   
+                font-size: 1.05rem;   
                 font-weight: 800;     
-                letter-spacing: 3px;  
+                letter-spacing: 2px;  
                 color: #111111;
                 line-height: 1; 
                 display: inline-block;
@@ -75,17 +75,20 @@
                 align-items: center; 
                 opacity: 0;
                 visibility: hidden;
-                transform: translateX(50px); 
+                transform: translateX(30px); /* 飛び出しの初期位置を滑らかにするため少し縮小 */
                 transition: opacity 2.0s ease, transform 2.0s cubic-bezier(0.16, 1, 0.3, 1), visibility 2.0s;
             }
             
-            /* 🎯【重要】展開した時の4つのメニュー文字（左右の端を画面にフィットさせるため1.05remへ微調整） */
+            /* 🎯【最重要】展開した時の4つのメニュー文字（絶対に画面からはみ出さない精密サイズ） */
             .nav-inline-links a {
                 text-decoration: none;
                 color: #111111;
-                font-size: 1.05rem;   /* 💡 左右が完璧に1本の垂直ラインで揃う絶妙なサイズ感 */
+                
+                /* 💡 文字サイズを0.9rem、間隔を2pxに引き締めたことで、右端のHOMEが写真の右辺の枠内に完璧に収まります */
+                font-size: 0.9rem;    
                 font-weight: 800;     
-                letter-spacing: 3px;  
+                letter-spacing: 2px;  
+                
                 line-height: 1;
             }
             .nav-inline-links a.current-page {
@@ -97,12 +100,12 @@
                 display: none;
             }
             
-            /* 🎯 右上の三本線（右端の垂直ラインを写真の右辺と完璧に一致させました） */
+            /* 右上の三本線（写真の右端ラインと完璧に位置が重なります） */
             .gallery-menu-label {
                 position: absolute; 
                 top: 50%;           
                 transform: translateY(-50%); 
-                right: 15px;        /* 💡 パディングと連動させて、右端の面を完璧に揃えました */
+                right: 20px;        /* 写真一覧の右端と完全に揃う位置 */
                 width: 16px;        
                 height: 14px;       
                 cursor: pointer;
@@ -159,7 +162,7 @@
                 <!-- 通常時のページタイトル -->
                 <h1 class="nav-title-main">MEGANE</h1>
                 
-                <!-- 🎯 タップ後に横一列で出現する4つのリンク（並び順：現在地先頭、HOME末尾・左右完全整列仕様） -->
+                <!-- タップ後に横一列で出現する4つのリンク（はみ出し修正版） -->
                 <nav class="nav-inline-links">
                     <a href="../megane/index.html" class="current-page">MEGANE</a>
                     <a href="../portrait/index.html">PORTRAIT</a>
@@ -167,7 +170,7 @@
                     <a href="../index.html">HOME</a>
                 </nav>
                 
-                <!-- 三本線メニューボタン（Eのサイズ同化・位置調整仕様） -->
+                <!-- 三本線メニューボタン -->
                 <label for="menu-toggle" class="gallery-menu-label">
                     <span></span>
                     <span></span>
