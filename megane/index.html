@@ -7,7 +7,7 @@
         <!-- キープする大元のスタイルシートを読み込みます -->
         <link rel="stylesheet" href="../style-v4.css">
         
-        <!-- 🎯 すっきりしたお気に入りのサイズ感をキープしたまま、右端のEを100%完全吸着させるデザイン -->
+        <!-- 🎯 文字を合体させず、美しい間隔のままHOMEのEの右端を完全吸着させるデザイン -->
         <style>
             html, body.sub-page {
                 height: auto !important;
@@ -88,22 +88,23 @@
             .nav-inline-links a {
                 text-decoration: none;
                 color: #111111;
-                font-size: 1rem;      /* 💡 お気に入りのすっきりしたサイズ感を100%キープ */
+                font-size: 1rem;      /* 💡 お気に入りのすっきりしたサイズ感を完全キープ */
                 font-weight: 800;     
-                
-                /* 🎯【最終微調整】文字間隔を3pxから「5px」へほんのわずかだけ広げました */
-                /* これにより、文字サイズを大きくすることなく、最後のEの右端を右側のラインに完璧に吸着させます */
-                letter-spacing: 5px;  
-                
+                letter-spacing: 3px;  /* 💡 バグの原因になった5pxを消去し、元の綺麗な3pxに戻しました */
                 line-height: 1;
                 display: inline-block;
                 position: relative;
                 padding: 0;
             }
             
+            /* 🎯【新アプローチ】一番右端にある文字（HOME）の右側の目に見えない隙間だけを削り取ります */
+            .nav-inline-links a:last-child {
+                margin-right: -3px; /* 💡 これにより、文字サイズを広げずにEの右端だけが写真の右辺に完璧に吸着します */
+            }
+            
             /* MEGANEの下線設定 */
             .nav-inline-links a.current-page {
-                border-bottom: 2px solid #111111; /* 構造が最も安定する標準の下線に戻しました */
+                border-bottom: 2px solid #111111; 
                 padding-bottom: 4px;
             }
             
@@ -167,7 +168,7 @@
                 <!-- 通常時のページタイトル -->
                 <h1 class="nav-title-main">MEGANE</h1>
                 
-                <!-- タップ後に横一列で出現する4つのリンク（Eの右端吸着決定版） -->
+                <!-- タップ後に横一列で出現する4つのリンク（アプローチ変更決定版） -->
                 <nav class="nav-inline-links">
                     <a href="../megane/index.html" class="current-page">MEGANE</a>
                     <a href="../portrait/index.html">PORTRAIT</a>
@@ -186,10 +187,6 @@
         </header>
         
         <main class="gallery-container">
-
-
-
-
 
 
         <!-- ここから上にコピペする -->
