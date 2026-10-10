@@ -7,7 +7,7 @@
         <!-- キープする大元のスタイルシートを読み込みます -->
         <link rel="stylesheet" href="../style-v4.css">
         
-        <!-- 🎯 文字を大きく保ちつつ右端を完全吸着させ、下線も文字幅に100%一致させるデザイン -->
+        <!-- 🎯 以前のすっきりしたサイズ感を完全復活させ、上下のズレと下線の長さを完璧に整えたデザイン -->
         <style>
             html, body.sub-page {
                 height: auto !important;
@@ -65,49 +65,44 @@
                 display: inline-block;
             }
             
-            /* 横一列のメニュー（2秒スライド仕様） */
+            /* 横一列のメニュー */
             .nav-inline-links {
-                display: none; /* 初期状態は非表示 */
+                display: none; 
                 width: 100%; 
                 justify-content: space-between; 
-                align-items: center; 
+                align-items: baseline; /* 💡 4つの文字の「底辺」を強制的に一直線上に揃え、上下のズレを完全に無くします */
                 opacity: 0;
                 visibility: hidden;
                 transform: translateX(30px); 
                 transition: opacity 2.0s ease, transform 2.0s cubic-bezier(0.16, 1, 0.3, 1), visibility 2.0s;
             }
             
-            /* 🎯【最重要】チェックが入ったときに横幅100%いっぱいに引っ張り出します */
             #menu-toggle:checked ~ .nav-inline-links {
-                display: flex !important; /* 💡確実に横に広く引っ張ることで右端の内側ズレを解消 */
+                display: flex !important; 
                 opacity: 1;
                 visibility: visible;
                 transform: translateX(0); 
             }
             
-            /* 展開した時の4つのメニュー文字 */
+            /* 🎯【サイズ復元】展開した時の4つのメニュー文字（お気に入りの前回のサイズ感に戻しました） */
             .nav-inline-links a {
                 text-decoration: none;
                 color: #111111;
-                font-size: 1.12rem; /* 💡ご希望の大きめのサイズを完璧に維持 */   
+                font-size: 1rem;      /* 💡 以前のすっきり美しい「1rem」へ完全復元 */
                 font-weight: 800;     
-                letter-spacing: 1.5px;  
+                letter-spacing: 3px;  /* 💡 文字の間隔も上品な「3px」へ完全復元 */
                 line-height: 1;
                 display: inline-block;
                 position: relative;
-                padding: 0; /* 💡自動で入る左右の透明な余白を完全にゼロにして文字の輪郭線だけにします */
+                padding: 0;
             }
             
-            /* 🎯【新設計】MEGANEの文字の純粋な幅と下線の長さを1ミリの狂いもなく完全同期 */
-            .nav-inline-links a.current-page {
-                padding-bottom: 4px; /* 下線との隙間 */
-            }
-            /* 透明な余白を消去したことで、width: 100% の指定が「文字の輪郭の端から端まで」に完全一致します */
+            /* 🎯 MEGANEの文字の長さ（幅）と下線の長さを1ミリの狂いもなく完全同期（上下の高さもキープ） */
             .nav-inline-links a.current-page::after {
                 content: "";
                 position: absolute;
                 left: 0;
-                bottom: 0;
+                bottom: -6px; /* 💡 文字自体を上にズラさず、文字の下側へ安全に下線を配置します */
                 width: 100%; 
                 height: 2px; 
                 background-color: #111111;
@@ -173,7 +168,7 @@
                 <!-- 通常時のページタイトル -->
                 <h1 class="nav-title-main">MEGANE</h1>
                 
-                <!-- タップ後に横一列で出現する4つのリンク（はみ出し・下線修正決定版） -->
+                <!-- タップ後に横一列で出現する4つのリンク（サイズ復元・ズレ解消版） -->
                 <nav class="nav-inline-links">
                     <a href="../megane/index.html" class="current-page">MEGANE</a>
                     <a href="../portrait/index.html">PORTRAIT</a>
@@ -192,6 +187,7 @@
         </header>
         
         <main class="gallery-container">
+
 
 
 
